@@ -294,7 +294,8 @@ public class Skeleton : MonoBehaviour {
 	void LateUpdate () {
 
 	#if !UNITY_EDITOR
-		// EditorUpdate();
+		//ЇБАНИЙ ФІКС! НАХУЯ ЦЕ БУЛО КОМЕНТУВАТИ? ХУЄВІ РАЗРАБОТЧІКИ ПЛАГІНІВ, СУКА
+		 EditorUpdate();
 	#endif
         if (Application.isEditor && bones != null) {
             for (int i=0; i<bones.Length; i++) {
