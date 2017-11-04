@@ -17,12 +17,14 @@ public class PlayerSetup : NetworkBehaviour
 				objs[0].GetComponent<PlayerController>().tag = "Player";
 				objs[0].GetComponent<PlayerController>().enemy = objs[1].GetComponent<PlayerController>();
 				objs[1].GetComponent<PlayerController>().tag = "Enemy";
+				objs[1].GetComponent<PlayerController>().enemy = objs[0].GetComponent<PlayerController>();
 			}
 			if (objs[1].isLocalPlayer)
 			{
 				objs[1].GetComponent<PlayerController>().tag = "Player";
 				objs[1].GetComponent<PlayerController>().enemy = objs[0].GetComponent<PlayerController>();
 				objs[0].GetComponent<PlayerController>().tag = "Enemy";
+				objs[0].GetComponent<PlayerController>().enemy = objs[1].GetComponent<PlayerController>();
 			}
 		}
         if (!isLocalPlayer)

@@ -46,7 +46,10 @@ public class PlayerController : MonoBehaviour
 
 	void Update()
 	{
-		if (isEnemy)
+		int sidee = transform.position.x - enemy.transform.position.x > 0 ? -1 : 1;
+		transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * sidee, transform.localScale.y, transform.localScale.z);
+
+		if (tag == "Enemy")
 			return;
 		transform.position += Vector3.right * currentDirection * speed * Time.deltaTime * side;
 		if (Input.GetKeyDown(KeyCode.F))
@@ -61,11 +64,6 @@ public class PlayerController : MonoBehaviour
 			SitUp();
 
 		var inputX = Input.GetAxis("Horizontal");
-		if (inputX != 0)
-		{
-			int sidee = transform.position.x - enemy.transform.position.x > 0 ? -1 : 1;
-			transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * sidee, transform.localScale.y, transform.localScale.z);
-		}
 		transform.position += Vector3.right * inputX * speed * Time.deltaTime * side;
 		legController.SetBool("isWalking", inputX != 0 || currentDirection != 0);
 	}
