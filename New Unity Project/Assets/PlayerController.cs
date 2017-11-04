@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
 
 		transform.position += Vector3.right * currentDirection * speed * Time.deltaTime * side;
 
-		legController.SetBool("isWalking", currentDirection != 0);
+		//legController.SetBool("isWalking", currentDirection != 0);
 		if (Input.GetKeyDown(KeyCode.F))
 		{
 			isRightPunch = !isRightPunch;
@@ -38,9 +38,9 @@ public class PlayerController : MonoBehaviour
 		{
 			body.AddForce(Vector2.up * jumpForce);
 		}
-		//var inputX = Input.GetAxis("Horizontal");
-		//transform.position += Vector3.right * inputX * speed * Time.deltaTime * side;
-		//legController.SetBool("isWalking", inputX != 0);
+		var inputX = Input.GetAxis("Horizontal");
+		transform.position += Vector3.right * inputX * speed * Time.deltaTime * side;
+		legController.SetBool("isWalking", inputX != 0 || currentDirection != 0);
 	}
 
 	public void Move(int direction)
