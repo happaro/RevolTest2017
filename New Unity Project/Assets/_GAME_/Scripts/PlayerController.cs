@@ -13,6 +13,10 @@ public class PlayerController : MonoBehaviour
 	public float healthPoints = 100;
 	public HealthBar healthLine;
 	//public Image energyLine;
+	public AudioClip handPunchSound, legPunchSound;
+	public AudioClip handWhip, legWhip;
+	public CapsuleCollider2D capsule;
+	public AudioClip deadClip;
 
 
 	public PlayerStats playerStats;
@@ -27,27 +31,27 @@ public class PlayerController : MonoBehaviour
 	public HitPoint[] handsPoints;
 	public HitPoint[] lagsPoints;
 
+	float offsetYup = -0.7f;
+	float offsetYdown = 0.1f;
+	float sizeYup = 7.9f;
+	float sizeYdown = 6.5f;
+
 	void Update()
 	{
 		if (isEnemy)
 			return;
 		transform.position += Vector3.right * currentDirection * speed * Time.deltaTime * side;
 		if (Input.GetKeyDown(KeyCode.F))
-		{
-			isRightPunch = !isRightPunch;
-			armController.SetTrigger(isRightPunch ? "punchRight" : "punchLeft");
-		}
-
+			PunchHand();
 		if (Input.GetKeyDown(KeyCode.G))
-		{
-			isRightPunchLeg = !isRightPunchLeg;
-			legController.SetTrigger(isRightPunchLeg ? "punchRight" : "punchLeft");
-		}
-
+			PunchLeg();
 		if (Input.GetKeyDown(KeyCode.Space))
-		{
 			Jump();
-		}
+		if (Input.GetKeyDown(KeyCode.DownArrow))
+			Sit();
+		if (Input.GetKeyUp(KeyCode.DownArrow))
+			SitUp();
+
 		var inputX = Input.GetAxis("Horizontal");
 		transform.position += Vector3.right * inputX * speed * Time.deltaTime * side;
 		legController.SetBool("isWalking", inputX != 0 || currentDirection != 0);
@@ -66,9 +70,19 @@ public class PlayerController : MonoBehaviour
 		healthLine.UpdateHP(healthPoints);
 	}
 
+	bool died = false;
+
 	public void Die()
 	{
-
+		if (!died)
+		{
+			died = true;
+			this.transform.Rotate(0, 0, -90);
+			if (deadClip != null)
+				SoundManager.Instance.PlayClip(deadClip);
+			capsule.size = new Vector2(2,2);
+		}
+		
 	}
 
 	public void Move(int direction)
@@ -86,12 +100,14 @@ public class PlayerController : MonoBehaviour
 
 	public void PunchHand()
 	{
+		SoundManager.Instance.PlayClip(handWhip);
 		isRightPunch = !isRightPunch;
 		armController.SetTrigger(isRightPunch ? "punchRight" : "punchLeft");
 	}
 
 	public void PunchLeg()
 	{
+		SoundManager.Instance.PlayClip(legWhip);
 		isRightPunchLeg = !isRightPunchLeg;
 		legController.SetTrigger(isRightPunchLeg ? "punchRight" : "punchLeft");
 	}
@@ -110,5 +126,30 @@ public class PlayerController : MonoBehaviour
 			body.AddForce(Vector2.up * jumpForce);
 			legController.SetBool("Jump", true);
 		}
+	}
+
+	public void Sit()
+	{
+		legController.SetBool("isDown", true);
+		capsule.size = new Vector2(capsule.size.x, sizeYdown);
+		capsule.offset = new Vector2(capsule.offset.x, offsetYdown);
+		/*if (!legController.SetBool("SitDown"))
+		{
+			body.AddForce(Vector2.up * jumpForce);
+			legController.SetBool("Jump", true);
+		}*/
+	}
+
+	public void SitUp()
+	{
+		legController.SetBool("isDown", false);
+		capsule.size = new Vector2(capsule.size.x, sizeYup);
+		capsule.offset = new Vector2(capsule.offset.x, offsetYup);
+
+		/*if (!legController.GetBool("SitUp"))
+		{
+			body.AddForce(Vector2.up * jumpForce);
+			legController.SetBool("Jump", true);
+		}*/
 	}
 }
