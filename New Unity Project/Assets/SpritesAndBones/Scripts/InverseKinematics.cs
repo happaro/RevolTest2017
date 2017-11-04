@@ -27,7 +27,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 
-[ExecuteInEditMode]
+//[ExecuteInEditMode]
 [RequireComponent(typeof(Bone))]
 public class InverseKinematics : MonoBehaviour {
     [HideInInspector]
@@ -98,6 +98,7 @@ public class InverseKinematics : MonoBehaviour {
 
 	void Start()
 	{
+
 		// Cache optimization
 		if (angleLimits.Length > 0 && nodeCache != null && nodeCache.Count != angleLimits.Length ||
 		angleLimits.Length > 0 && nodeCache == null){
@@ -122,6 +123,8 @@ public class InverseKinematics : MonoBehaviour {
     void Update() {
         if (chainLength < 0)
             chainLength = 0;
+		//if (Input.GetKeyDown(KeyCode.S))
+			//Start();
 		if (!Application.isPlaying)
 			Start();
     }
@@ -132,7 +135,8 @@ public class InverseKinematics : MonoBehaviour {
      * Angle Limit code adapted from Veli-Pekka Kokkonen's SimpleCCD http://goo.gl/6oSzDx
      **/
     public void resolveSK2D() {
-        for (int it = 0; it < iterations; it++) {
+		//GameObject.FindObjectOfType<Test>().texta.text = "YUUPA";
+		for (int it = 0; it < iterations; it++) {
             int i = ChainLength;
             Transform bone = transform;
             Bone b = bone.GetComponent<Bone>();
@@ -140,9 +144,11 @@ public class InverseKinematics : MonoBehaviour {
             while (--i >= 0 && bone != null) {
                 Vector3 root = bone.position;
 
+				//Debug.LogWarning("here");
                 // Z position can be different than 0
                 Vector3 root2tip = ((Vector3)b.Head - (Vector3)(Vector2)root);
-                Vector3 root2target = (((target != null) ? (Vector3)(Vector2)target.transform.position : (Vector3)b.Head) - (Vector3)(Vector2)root);
+				
+				Vector3 root2target = (((target != null) ? (Vector3)(Vector2)target.transform.position : (Vector3)b.Head) - (Vector3)(Vector2)root);
 
 				// Calculate how much we should rotate to get to the target
 				float angle = SignedAngle(root2tip, root2target, bone);
