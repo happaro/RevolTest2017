@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
 	public AudioClip handPunchSound, legPunchSound;
 	public AudioClip handWhip, legWhip;
 	public CapsuleCollider2D capsule;
+	public AudioClip deadClip;
+
 
 	public PlayerStats playerStats;
 	private bool isMainPlayer;
@@ -68,9 +70,18 @@ public class PlayerController : MonoBehaviour
 		healthLine.UpdateHP(healthPoints);
 	}
 
+	bool died = false;
+
 	public void Die()
 	{
-
+		if (!died)
+		{
+			this.transform.Rotate(0, 0, -90);
+			if (deadClip != null)
+				SoundManager.Instance.PlayClip(deadClip);
+			capsule.size = new Vector2(2,2);
+		}
+		
 	}
 
 	public void Move(int direction)
