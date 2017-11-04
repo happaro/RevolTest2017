@@ -13,7 +13,8 @@ public class PlayerController : MonoBehaviour
 	public float healthPoints = 100;
 	public HealthBar healthLine;
 	//public Image energyLine;
-
+	public AudioClip handPunchSound, legPunchSound;
+	public AudioClip handWhip, legWhip;
 
 	public PlayerStats playerStats;
 	private bool isMainPlayer;
@@ -33,21 +34,11 @@ public class PlayerController : MonoBehaviour
 			return;
 		transform.position += Vector3.right * currentDirection * speed * Time.deltaTime * side;
 		if (Input.GetKeyDown(KeyCode.F))
-		{
-			isRightPunch = !isRightPunch;
-			armController.SetTrigger(isRightPunch ? "punchRight" : "punchLeft");
-		}
-
+			PunchHand();
 		if (Input.GetKeyDown(KeyCode.G))
-		{
-			isRightPunchLeg = !isRightPunchLeg;
-			legController.SetTrigger(isRightPunchLeg ? "punchRight" : "punchLeft");
-		}
-
+			PunchLeg();
 		if (Input.GetKeyDown(KeyCode.Space))
-		{
 			Jump();
-		}
 		var inputX = Input.GetAxis("Horizontal");
 		transform.position += Vector3.right * inputX * speed * Time.deltaTime * side;
 		legController.SetBool("isWalking", inputX != 0 || currentDirection != 0);
@@ -86,12 +77,14 @@ public class PlayerController : MonoBehaviour
 
 	public void PunchHand()
 	{
+		SoundManager.Instance.PlayClip(handWhip);
 		isRightPunch = !isRightPunch;
 		armController.SetTrigger(isRightPunch ? "punchRight" : "punchLeft");
 	}
 
 	public void PunchLeg()
 	{
+		SoundManager.Instance.PlayClip(legWhip);
 		isRightPunchLeg = !isRightPunchLeg;
 		legController.SetTrigger(isRightPunchLeg ? "punchRight" : "punchLeft");
 	}

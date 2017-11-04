@@ -6,6 +6,7 @@ public class HitPoint : MonoBehaviour
 {
 	public PlayerController father;
 	public float damage;
+	public AudioClip punchClip;
 
 	private void Start()
 	{
@@ -16,6 +17,7 @@ public class HitPoint : MonoBehaviour
 	{
 		if (other.tag == "Enemy")
 		{
+			SoundManager.Instance.PlayClip(punchClip, 1, Random.Range(800f, 1200f) / 1000f);
 			other.GetComponent<PlayerController>().GetDamage(damage);
 			gameObject.SetActive(false);
 		}
