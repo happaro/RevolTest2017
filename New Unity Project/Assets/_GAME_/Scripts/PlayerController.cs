@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 	public float walkSpeed;
 	public float jumpForce;
 	public int side = 1;
+	public int speed;
 	public Rigidbody2D body;
 
 	public PlayerStats playerStats;
@@ -19,13 +20,9 @@ public class PlayerController : MonoBehaviour
 
 	private int currentDirection;
 
-	private PlayerStat myStats { get { return playerStats.stats[isMainPlayer ? 0 : 1]; } set
-		{
-			playerStats.stats[isMainPlayer ? 0 : 1] = value;
-		} }
 	void Update()
 	{
-		transform.position += Vector3.right * currentDirection * myStats.speed * Time.deltaTime * side;
+		transform.position += Vector3.right * currentDirection * speed * Time.deltaTime * side;
 		if (Input.GetKeyDown(KeyCode.F))
 		{
 			isRightPunch = !isRightPunch;
@@ -44,7 +41,7 @@ public class PlayerController : MonoBehaviour
 
 		}
 		var inputX = Input.GetAxis("Horizontal");
-		transform.position += Vector3.right * inputX * myStats.speed * Time.deltaTime * side;
+		transform.position += Vector3.right * inputX * speed * Time.deltaTime * side;
 		legController.SetBool("isWalking", inputX != 0 || currentDirection != 0);
 	}
 
