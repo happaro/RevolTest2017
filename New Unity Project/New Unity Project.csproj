@@ -84,7 +84,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\HealthBar.cs" />
+    <Compile Include="Assets\HitPoint.cs" />
     <Compile Include="Assets\PlayerStats.cs" />
+    <Compile Include="Assets\PointsHelper.cs" />
     <Compile Include="Assets\SpritesAndBones\Scripts\AnimationWindowUtils.cs" />
     <Compile Include="Assets\SpritesAndBones\Scripts\Bone.cs" />
     <Compile Include="Assets\SpritesAndBones\Scripts\ControlPoint.cs" />
