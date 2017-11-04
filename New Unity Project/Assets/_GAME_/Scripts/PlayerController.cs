@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
 	private int currentDirection;
 
 
-	void Update ()
+	void Update()
 	{
 
 		transform.position += Vector3.right * currentDirection * speed * Time.deltaTime * side;
@@ -36,7 +36,8 @@ public class PlayerController : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			body.AddForce(Vector2.up * jumpForce);
+			Jump();
+
 		}
 		var inputX = Input.GetAxis("Horizontal");
 		transform.position += Vector3.right * inputX * speed * Time.deltaTime * side;
@@ -66,5 +67,24 @@ public class PlayerController : MonoBehaviour
 	{
 		isRightPunchLeg = !isRightPunchLeg;
 		legController.SetTrigger(isRightPunchLeg ? "punchRight" : "punchLeft");
+	}
+
+
+	private void OnCollisionEnter2D(Collision2D collision)
+	{
+		Debug.LogWarning(collision.transform.tag);
+		if (collision.transform.tag == "Floor")
+		{
+			legController.SetBool("Jump", false);
+		}
+	}
+	public void Jump()
+	{
+		//TODO: IF NOT IN AIR..
+		if (!legController.GetBool("Jump"))
+		{
+			body.AddForce(Vector2.up * jumpForce);
+			legController.SetBool("Jump", true);
+		}
 	}
 }
