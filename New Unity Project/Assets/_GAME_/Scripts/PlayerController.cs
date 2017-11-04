@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
 	public CapsuleCollider2D capsule;
 	public AudioClip deadClip;
 
+	[HideInInspector]
+	public PlayerController enemy;
 
 	public PlayerStats playerStats;
 	private bool isMainPlayer;
@@ -36,6 +38,12 @@ public class PlayerController : MonoBehaviour
 	float sizeYup = 7.9f;
 	float sizeYdown = 6.5f;
 
+
+	public void Init()
+	{
+		//if (tag == "Enemy")
+	}
+
 	void Update()
 	{
 		if (isEnemy)
@@ -53,6 +61,11 @@ public class PlayerController : MonoBehaviour
 			SitUp();
 
 		var inputX = Input.GetAxis("Horizontal");
+		if (inputX != 0)
+		{
+			int sidee = transform.position.x - enemy.transform.position.x > 0 ? -1 : 1;
+			transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * sidee, transform.localScale.y, transform.localScale.z);
+		}
 		transform.position += Vector3.right * inputX * speed * Time.deltaTime * side;
 		legController.SetBool("isWalking", inputX != 0 || currentDirection != 0);
 	}
@@ -85,8 +98,12 @@ public class PlayerController : MonoBehaviour
 		
 	}
 
+	
+
 	public void Move(int direction)
 	{
+		int sidee = transform.position.x - enemy.transform.position.x > 0 ? 1 : -1;
+		transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * sidee, transform.localScale.y, transform.localScale.z);
 		currentDirection = direction;
 	}
 
@@ -133,11 +150,6 @@ public class PlayerController : MonoBehaviour
 		legController.SetBool("isDown", true);
 		capsule.size = new Vector2(capsule.size.x, sizeYdown);
 		capsule.offset = new Vector2(capsule.offset.x, offsetYdown);
-		/*if (!legController.SetBool("SitDown"))
-		{
-			body.AddForce(Vector2.up * jumpForce);
-			legController.SetBool("Jump", true);
-		}*/
 	}
 
 	public void SitUp()
@@ -145,11 +157,5 @@ public class PlayerController : MonoBehaviour
 		legController.SetBool("isDown", false);
 		capsule.size = new Vector2(capsule.size.x, sizeYup);
 		capsule.offset = new Vector2(capsule.offset.x, offsetYup);
-
-		/*if (!legController.GetBool("SitUp"))
-		{
-			body.AddForce(Vector2.up * jumpForce);
-			legController.SetBool("Jump", true);
-		}*/
 	}
 }
