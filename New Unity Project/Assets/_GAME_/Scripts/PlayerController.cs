@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
 
 	void UpdateHP()
 	{
-		healthLine.UpdateHP(healthPoints);
+		//healthLine.UpdateHP(healthPoints);
 	}
 
 	bool died = false;
