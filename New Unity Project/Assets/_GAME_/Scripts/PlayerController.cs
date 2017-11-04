@@ -76,6 +76,7 @@ public class PlayerController : MonoBehaviour
 	{
 		if (!died)
 		{
+			died = true;
 			this.transform.Rotate(0, 0, -90);
 			if (deadClip != null)
 				SoundManager.Instance.PlayClip(deadClip);
