@@ -84,11 +84,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\ButtonsHelper.cs" />
     <Compile Include="Assets\HealthBar.cs" />
     <Compile Include="Assets\HitPoint.cs" />
+    <Compile Include="Assets\HostGame.cs" />
+    <Compile Include="Assets\JoinGame.cs" />
+    <Compile Include="Assets\MyNetworkManager.cs" />
+    <Compile Include="Assets\PlayerSetup.cs" />
     <Compile Include="Assets\PlayerStats.cs" />
     <Compile Include="Assets\PointsHelper.cs" />
     <Compile Include="Assets\PunchStar.cs" />
+    <Compile Include="Assets\RoomListItem.cs" />
     <Compile Include="Assets\SoundManager.cs" />
     <Compile Include="Assets\SpritesAndBones\Scripts\AnimationWindowUtils.cs" />
     <Compile Include="Assets\SpritesAndBones\Scripts\Bone.cs" />

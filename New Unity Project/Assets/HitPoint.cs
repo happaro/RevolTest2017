@@ -21,7 +21,7 @@ public class HitPoint : MonoBehaviour
 			//GameObject prefab = Resources.Load<GameObject>("punchStar");
 			//GameObject newObj = Instantiate(prefab, this.transform.position, Quaternion.identity) as GameObject;
 			//newObj.transform.parent = other.transform;
-			//SoundManager.Instance.PlayClip(punchClip, 1, Random.Range(800f, 1200f) / 1000f);
+			SoundManager.Instance.PlayClip(punchClip, 1, Random.Range(800f, 1200f) / 1000f);
 			//other.GetComponent<PlayerController>().GetDamage(damage);
 			gameObject.SetActive(false);
 		}

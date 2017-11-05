@@ -20,6 +20,7 @@ public class PlayerSetup : NetworkBehaviour
 				objs[0].GetComponent<PlayerController>().enemy = objs[1].GetComponent<PlayerController>();
 				objs[1].GetComponent<PlayerController>().tag = "Enemy";
 				objs[1].GetComponent<PlayerController>().enemy = objs[0].GetComponent<PlayerController>();
+				ButtonsHelper.Instace.player = objs[0].GetComponent<PlayerController>();
 			}
 			if (objs[1].isLocalPlayer)
 			{
@@ -27,6 +28,7 @@ public class PlayerSetup : NetworkBehaviour
 				objs[1].GetComponent<PlayerController>().enemy = objs[0].GetComponent<PlayerController>();
 				objs[0].GetComponent<PlayerController>().tag = "Enemy";
 				objs[0].GetComponent<PlayerController>().enemy = objs[1].GetComponent<PlayerController>();
+				ButtonsHelper.Instace.player = objs[1].GetComponent<PlayerController>();
 			}
 		}
         if (!isLocalPlayer)
@@ -52,7 +54,7 @@ public class PlayerSetup : NetworkBehaviour
 		GameObject newObj = Instantiate(prefab, position, Quaternion.identity) as GameObject;
 		newObj.transform.parent = enemy.transform;
 		enemy.GetComponent<PlayerController>().GetDamage(damage);
-		GameObject.FindGameObjectWithTag("Console").GetComponent<UnityEngine.UI.Text>().text += "\n" + id.ToString();
+		//GameObject.FindGameObjectWithTag("Console").GetComponent<UnityEngine.UI.Text>().text += "\n" + id.ToString();
 	}
 
 	private void DisableAllAnimators(Transform t)
