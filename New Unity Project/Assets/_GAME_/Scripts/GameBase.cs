@@ -88,6 +88,8 @@ public class GameBaseEditor : Editor
 	}
 }
 
+#endif
+
 [Serializable]
 public class PlayerProps
 {
@@ -106,5 +108,3 @@ public class PlayerProps
 		price = 2000;
 	}
 }
-
-#endif
