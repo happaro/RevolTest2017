@@ -29,8 +29,18 @@ public class PlayerController : MonoBehaviour
 			int side = transform.position.x - enemy.transform.position.x > 0 ? -1 : 1;
 			transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * side, transform.localScale.y, transform.localScale.z);
 		}
+
+        if(isBot)
+        {
+            MakeAction();
+            return;
+        }
+
 		if (tag == "Enemy")
 			return;
+
+        KeyboardCheck();
+
 		transform.position += Vector3.right * currentDirection * speed * Time.deltaTime;
 	}
 
@@ -50,6 +60,32 @@ public class PlayerController : MonoBehaviour
 		transform.position += Vector3.right * inputX * speed * Time.deltaTime;
 		legController.SetBool("isWalking", inputX != 0 || currentDirection != 0);
 	}
+
+    private void MakeAction()
+    {
+        float distance = transform.position.x - enemy.transform.position.x;
+        Debug.Log("distance = " + distance);
+        if (Mathf.Abs(distance)>2)
+        {
+            int sidee = distance > 0 ? -1 : 1;
+            transform.position += Vector3.right * sidee * speed * Time.deltaTime;
+            legController.SetBool("isWalking", true);
+        }
+        switch (Random.Range(0, 500))
+        {
+            case 0: Jump(); break;
+        }
+        if (Mathf.Abs(distance)<3) 
+        {
+            switch (Random.Range(0, 50))                
+            {
+                case 0: PunchHand(); break;
+                case 1: PunchLeg(); break;
+            }
+        }
+        legController.SetBool("isWalking", false);
+
+    }
 
 	public void GetDamage(float damage)
 	{
