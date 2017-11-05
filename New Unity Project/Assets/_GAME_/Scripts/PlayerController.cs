@@ -1,61 +1,41 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Networking;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-	public float walkSpeed;
-	public float jumpForce;
-	public int side = 1;
-	public int speed;
-	public Rigidbody2D body;
-	public float healthPoints = 100;
-	public HealthBar healthLine;
-	//public Image energyLine;
-	public AudioClip handPunchSound, legPunchSound;
-	public AudioClip handWhip, legWhip;
+	public Animator armController, legController;
 	public CapsuleCollider2D capsule;
-	public AudioClip deadClip;
+	public int speed;
+	public float jumpForce;
+	public float healthPoints = 100;
 
 	[HideInInspector]
 	public PlayerController enemy;
-
 	public PlayerStats playerStats;
-	private bool isMainPlayer;
-	public bool isEnemy = false;
 
-	public Animator armController, legController, spineController;
-	bool isRightPunch;
-	bool isRightPunchLeg;
-
+	private Rigidbody2D body;
 	private int currentDirection;
-	public HitPoint[] handsPoints;
-	public HitPoint[] lagsPoints;
+	private float offsetYup = -0.7f, offsetYdown = 0.1f, sizeYup = 7.9f, sizeYdown = 6.5f;
+	private bool isRightPunch, isRightPunchLeg, died;
 
-	float offsetYup = -0.7f;
-	float offsetYdown = 0.1f;
-	float sizeYup = 7.9f;
-	float sizeYdown = 6.5f;
-
-
-	public void Init()
+	private void Start()
 	{
-		//if (tag == "Enemy")
+		body = GetComponent<Rigidbody2D>();
 	}
 
 	void Update()
 	{
 		if (enemy != null)
 		{
-			int sidee = transform.position.x - enemy.transform.position.x > 0 ? -1 : 1;
-			transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * sidee, transform.localScale.y, transform.localScale.z);
+			int side = transform.position.x - enemy.transform.position.x > 0 ? -1 : 1;
+			transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * side, transform.localScale.y, transform.localScale.z);
 		}
-
 		if (tag == "Enemy")
 			return;
-		transform.position += Vector3.right * currentDirection * speed * Time.deltaTime * side;
+		transform.position += Vector3.right * currentDirection * speed * Time.deltaTime;
+	}
+
+	private void KeyboardCheck()
+	{
 		if (Input.GetKeyDown(KeyCode.F))
 			PunchHand();
 		if (Input.GetKeyDown(KeyCode.G))
@@ -66,10 +46,8 @@ public class PlayerController : MonoBehaviour
 			Sit();
 		if (Input.GetKeyUp(KeyCode.DownArrow))
 			SitUp();
-
-
 		var inputX = Input.GetAxis("Horizontal");
-		transform.position += Vector3.right * inputX * speed * Time.deltaTime * side;
+		transform.position += Vector3.right * inputX * speed * Time.deltaTime;
 		legController.SetBool("isWalking", inputX != 0 || currentDirection != 0);
 	}
 
@@ -88,22 +66,18 @@ public class PlayerController : MonoBehaviour
 		else ButtonsHelper.Instace.healthLineEnemy.UpdateHP(healthPoints);
 	}
 
-	bool died = false;
-
 	public void Die()
 	{
 		if (!died)
 		{
 			died = true;
 			this.transform.Rotate(0, 0, -90);
-			if (deadClip != null)
-				SoundManager.Instance.PlayClip(deadClip);
+			//if (deadClip != null)
+				//SoundManager.Instance.PlayClip(deadClip);
 			capsule.size = new Vector2(2, 2);
 		}
 
 	}
-
-
 
 	public void Move(int direction)
 	{
@@ -115,25 +89,22 @@ public class PlayerController : MonoBehaviour
 	public void Stop(int direction)
 	{
 		if (direction == currentDirection)
-		{
 			currentDirection = 0;
-		}
 	}
 
 	public void PunchHand()
 	{
-		SoundManager.Instance.PlayClip(handWhip);
+		//SoundManager.Instance.PlayClip(handWhip);
 		isRightPunch = !isRightPunch;
 		armController.SetTrigger(isRightPunch ? "punchRight" : "punchLeft");
 	}
 
 	public void PunchLeg()
 	{
-		SoundManager.Instance.PlayClip(legWhip);
+		//SoundManager.Instance.PlayClip(legWhip);
 		isRightPunchLeg = !isRightPunchLeg;
 		legController.SetTrigger(isRightPunchLeg ? "punchRight" : "punchLeft");
 	}
-
 
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
