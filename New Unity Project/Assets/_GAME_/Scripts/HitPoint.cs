@@ -5,6 +5,7 @@ using UnityEngine;
 public class HitPoint : MonoBehaviour
 {
 	public PlayerSetup father;
+    public PlayerController playerController;
 	public float damage;
 	public AudioClip punchClip;
 
@@ -13,23 +14,32 @@ public class HitPoint : MonoBehaviour
 		father = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSetup>();
 	}
 
-	private void OnTriggerEnter2D(Collider2D other)
-	{
-		if (other.tag == "Enemy")
-		{
-            if (father != null)
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (father != null)
+        {
+            if (other.tag == "Enemy")
             {
                 father.CmdHit(this.transform.position, damage, father.netId.Value);
             }
-            else 
+        }
+        else
+        {
+            var otherPlayerController = other.GetComponent<PlayerController>();
+            if (otherPlayerController == null || playerController == otherPlayerController)
             {
-                GameObject prefab = Resources.Load<GameObject>("punchStar");
-                GameObject newObj = Instantiate(prefab, this.transform.position, Quaternion.identity) as GameObject;
-                newObj.transform.parent = other.transform;
-                other.GetComponent<PlayerController>().GetDamage(damage);
+                gameObject.SetActive(false);
+                return;
             }
-			SoundManager.Instance.PlayClip(punchClip, 1, Random.Range(800f, 1200f) / 1000f);
-			gameObject.SetActive(false);
-		}
-	}
+            GameObject prefab = Resources.Load<GameObject>("punchStar");
+            GameObject newObj = Instantiate(prefab, this.transform.position, Quaternion.identity) as GameObject;
+            newObj.transform.parent = other.transform;
+            otherPlayerController.GetDamage(damage);
+
+        }
+        SoundManager.Instance.PlayClip(punchClip, 1, Random.Range(800f, 1200f) / 1000f);
+        gameObject.SetActive(false);
+    }
+
+    
 }

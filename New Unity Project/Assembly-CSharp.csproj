@@ -46,19 +46,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\ButtonsHelper.cs" />
-     <Compile Include="Assets\HealthBar.cs" />
-     <Compile Include="Assets\HitPoint.cs" />
-     <Compile Include="Assets\HostGame.cs" />
-     <Compile Include="Assets\JoinGame.cs" />
-     <Compile Include="Assets\MyNetworkManager.cs" />
-     <Compile Include="Assets\PlayerSetup.cs" />
-     <Compile Include="Assets\PlayerStats.cs" />
-     <Compile Include="Assets\PointsHelper.cs" />
-     <Compile Include="Assets\PunchStar.cs" />
-     <Compile Include="Assets\RoomListItem.cs" />
-     <Compile Include="Assets\SceneController.cs" />
-     <Compile Include="Assets\SoundManager.cs" />
      <Compile Include="Assets\SpritesAndBones\Scripts\AnimationWindowUtils.cs" />
      <Compile Include="Assets\SpritesAndBones\Scripts\Bone.cs" />
      <Compile Include="Assets\SpritesAndBones\Scripts\ControlPoint.cs" />
@@ -177,7 +164,20 @@
      <Compile Include="Assets\SpritesAndBones\Scripts\Utils\Triangulator.cs" />
      <Compile Include="Assets\SpritesAndBones\Scripts\Utils\Utils.cs" />
      <Compile Include="Assets\SpritesAndBones\Scripts\Utils\Vertices.cs" />
+     <Compile Include="Assets\_GAME_\Scripts\ButtonsHelper.cs" />
+     <Compile Include="Assets\_GAME_\Scripts\HealthBar.cs" />
+     <Compile Include="Assets\_GAME_\Scripts\HitPoint.cs" />
+     <Compile Include="Assets\_GAME_\Scripts\HostGame.cs" />
+     <Compile Include="Assets\_GAME_\Scripts\JoinGame.cs" />
+     <Compile Include="Assets\_GAME_\Scripts\MyNetworkManager.cs" />
      <Compile Include="Assets\_GAME_\Scripts\PlayerController.cs" />
+     <Compile Include="Assets\_GAME_\Scripts\PlayerSetup.cs" />
+     <Compile Include="Assets\_GAME_\Scripts\PlayerStats.cs" />
+     <Compile Include="Assets\_GAME_\Scripts\PointsHelper.cs" />
+     <Compile Include="Assets\_GAME_\Scripts\PunchStar.cs" />
+     <Compile Include="Assets\_GAME_\Scripts\RoomListItem.cs" />
+     <Compile Include="Assets\_GAME_\Scripts\SceneController.cs" />
+     <Compile Include="Assets\_GAME_\Scripts\SoundManager.cs" />
      <None Include="Assets\SpritesAndBones\Shader\Sprites-Skeleton-Diffuse.shader" />
      <None Include="Assets\SpritesAndBones\Shader\Sprites-Skeleton-Cutout.shader" />
      <None Include="Assets\SpritesAndBones\Shader\LinesColoredBlended.shader" />
