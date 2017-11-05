@@ -113,8 +113,8 @@ public class PlayerController : MonoBehaviour
 	void UpdateHP()
 	{
 		if (tag == "Player")
-			ButtonsHelper.Instace.healthLinePlayer.UpdateHP(healthPoints);
-		else ButtonsHelper.Instace.healthLineEnemy.UpdateHP(healthPoints);
+			ButtonsHelper.Instance.healthLinePlayer.UpdateHP(healthPoints);
+		else ButtonsHelper.Instance.healthLineEnemy.UpdateHP(healthPoints);
 	}
 
 	public void Die()
@@ -132,18 +132,12 @@ public class PlayerController : MonoBehaviour
 
 	public void Move(int direction)
 	{
-        if(enemy!=null)
-        {
-            int sidee = transform.position.x - enemy.transform.position.x > 0 ? 1 : -1;
-            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * sidee, transform.localScale.y, transform.localScale.z);
-        }		
 		currentDirection = direction;
 	}
 
-	public void Stop(int direction)
+	public void Stop()
 	{
-		if (direction == currentDirection)
-			currentDirection = 0;
+		currentDirection = 0;
 	}
 
 	public void PunchHand()

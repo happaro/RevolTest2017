@@ -17,7 +17,7 @@ public class PlayerSetup : NetworkBehaviour
             if (objs[0].isLocalPlayer)
             {
                 objs[0].GetComponent<PlayerController>().tag = "Player";
-                ButtonsHelper.Instace.player = objs[0].GetComponent<PlayerController>();
+                ButtonsHelper.Instance.player = objs[0].GetComponent<PlayerController>();
             }
         }
 		else if (objs.Length > 1)
