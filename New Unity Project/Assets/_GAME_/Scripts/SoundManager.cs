@@ -12,6 +12,8 @@ public class SoundManager : MonoBehaviour
 	public AudioClip[] clips;
 	[HideInInspector]
 	public AudioClip mainTheme;
+    [HideInInspector]
+    public AudioClip buffer;
 
 	public static SoundManager Instance;
 

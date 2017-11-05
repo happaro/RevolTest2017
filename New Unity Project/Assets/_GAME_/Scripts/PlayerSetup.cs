@@ -62,6 +62,11 @@ public class PlayerSetup : NetworkBehaviour
 		GameObject newObj = Instantiate(prefab, position, Quaternion.identity) as GameObject;
 		newObj.transform.parent = enemy.transform;
 		enemy.GetComponent<PlayerController>().GetDamage(damage);
+        if(SoundManager.Instance.buffer!= null)
+        {
+            SoundManager.Instance.PlayClip(SoundManager.Instance.buffer, 1, Random.Range(800f, 1200f) / 1000f);
+        }
+        
 		//GameObject.FindGameObjectWithTag("Console").GetComponent<UnityEngine.UI.Text>().text += "\n" + id.ToString();
 	}
 
