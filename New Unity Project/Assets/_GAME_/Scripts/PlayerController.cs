@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -46,8 +47,11 @@ public class PlayerController : MonoBehaviour
 
 	void Update()
 	{
-		int sidee = transform.position.x - enemy.transform.position.x > 0 ? -1 : 1;
-		transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * sidee, transform.localScale.y, transform.localScale.z);
+		if (enemy != null)
+		{
+			int sidee = transform.position.x - enemy.transform.position.x > 0 ? -1 : 1;
+			transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * sidee, transform.localScale.y, transform.localScale.z);
+		}
 
 		if (tag == "Enemy")
 			return;
@@ -62,6 +66,7 @@ public class PlayerController : MonoBehaviour
 			Sit();
 		if (Input.GetKeyUp(KeyCode.DownArrow))
 			SitUp();
+
 
 		var inputX = Input.GetAxis("Horizontal");
 		transform.position += Vector3.right * inputX * speed * Time.deltaTime * side;
@@ -78,7 +83,9 @@ public class PlayerController : MonoBehaviour
 
 	void UpdateHP()
 	{
-		//healthLine.UpdateHP(healthPoints);
+		if (tag == "Player")
+			ButtonsHelper.Instace.healthLinePlayer.UpdateHP(healthPoints);
+		else ButtonsHelper.Instace.healthLineEnemy.UpdateHP(healthPoints);
 	}
 
 	bool died = false;
@@ -91,12 +98,12 @@ public class PlayerController : MonoBehaviour
 			this.transform.Rotate(0, 0, -90);
 			if (deadClip != null)
 				SoundManager.Instance.PlayClip(deadClip);
-			capsule.size = new Vector2(2,2);
+			capsule.size = new Vector2(2, 2);
 		}
-		
+
 	}
 
-	
+
 
 	public void Move(int direction)
 	{

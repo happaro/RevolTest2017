@@ -5,6 +5,13 @@ using UnityEngine;
 public class ButtonsHelper : MonoBehaviour
 {
 	public PlayerController player;
+	public HealthBar healthLinePlayer, healthLineEnemy;
+
+	public static ButtonsHelper Instace;
+	private void Start()
+	{
+		Instace = this;
+	}
 
 	public void PunchArm()
 	{
@@ -30,4 +37,5 @@ public class ButtonsHelper : MonoBehaviour
 	{
 		player.Stop(direction);
 	}
+
 }
