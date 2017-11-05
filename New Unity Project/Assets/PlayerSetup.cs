@@ -7,9 +7,11 @@ public class PlayerSetup : NetworkBehaviour
 {
     public Behaviour[] componentsToDisable;
 	public PlayerController myPlayer, enemyPlayer;
-    void Start()
+	private PlayerSetup[] objs;
+
+	void Start()
     {
-		var objs = FindObjectsOfType<PlayerSetup>();
+		objs = FindObjectsOfType<PlayerSetup>();
 		if (objs.Length > 1)
 		{
 			if (objs[0].isLocalPlayer)
@@ -35,7 +37,25 @@ public class PlayerSetup : NetworkBehaviour
         }
     }
 
-    private void DisableAllAnimators(Transform t)
+	[Command]
+	public void CmdHit(Vector3 position, float damage, uint id)
+	{
+		RpcHit(position, damage, id);
+	}
+
+	[ClientRpc]
+	private void RpcHit(Vector3 position, float damage, uint id)
+	{
+		objs = FindObjectsOfType<PlayerSetup>();
+		var enemy = objs[0].netId.Value != id ? objs[0] : objs[1];
+		GameObject prefab = Resources.Load<GameObject>("punchStar");
+		GameObject newObj = Instantiate(prefab, position, Quaternion.identity) as GameObject;
+		newObj.transform.parent = enemy.transform;
+		enemy.GetComponent<PlayerController>().GetDamage(damage);
+		GameObject.FindGameObjectWithTag("Console").GetComponent<UnityEngine.UI.Text>().text += "\n" + id.ToString();
+	}
+
+	private void DisableAllAnimators(Transform t)
     {
         foreach (var animator in  t.gameObject.GetComponents<Animator>())
         {
