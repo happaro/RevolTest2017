@@ -54,6 +54,10 @@ public class ButtonsHelper : MonoBehaviour
 					SitDown();
 				}
 			}
+			if (joy.anchoredPosition.y > -30)
+			{
+				SitUp();
+			}
 		}
 	}
 
