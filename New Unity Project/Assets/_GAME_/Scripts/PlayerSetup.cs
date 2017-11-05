@@ -12,7 +12,15 @@ public class PlayerSetup : NetworkBehaviour
 	void Start()
     {
 		objs = FindObjectsOfType<PlayerSetup>();
-		if (objs.Length > 1)
+        if (objs.Length == 1)
+        {
+            if (objs[0].isLocalPlayer)
+            {
+                objs[0].GetComponent<PlayerController>().tag = "Player";
+                ButtonsHelper.Instace.player = objs[0].GetComponent<PlayerController>();
+            }
+        }
+		else if (objs.Length > 1)
 		{
 			if (objs[0].isLocalPlayer)
 			{

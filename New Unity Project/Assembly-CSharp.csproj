@@ -46,6 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\PlayerInfoPrefab.cs" />
      <Compile Include="Assets\SpritesAndBones\Scripts\AnimationWindowUtils.cs" />
      <Compile Include="Assets\SpritesAndBones\Scripts\Bone.cs" />
      <Compile Include="Assets\SpritesAndBones\Scripts\ControlPoint.cs" />
@@ -165,6 +166,7 @@
      <Compile Include="Assets\SpritesAndBones\Scripts\Utils\Utils.cs" />
      <Compile Include="Assets\SpritesAndBones\Scripts\Utils\Vertices.cs" />
      <Compile Include="Assets\_GAME_\Scripts\ButtonsHelper.cs" />
+     <Compile Include="Assets\_GAME_\Scripts\GameBase.cs" />
      <Compile Include="Assets\_GAME_\Scripts\HealthBar.cs" />
      <Compile Include="Assets\_GAME_\Scripts\HitPoint.cs" />
      <Compile Include="Assets\_GAME_\Scripts\HostGame.cs" />
