@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ButtonsHelper : MonoBehaviour
 {
@@ -9,6 +7,7 @@ public class ButtonsHelper : MonoBehaviour
 	public RectTransform joy;
 	public float maxR;
 
+	private Vector3 mousePos;
 
 	public static ButtonsHelper Instance;
 	private void Awake()
@@ -21,7 +20,6 @@ public class ButtonsHelper : MonoBehaviour
 	private bool isHold = false;
 	public void JoyDown()
 	{
-		Debug.LogWarning("down");
 		isHold = true;
 	}
 
@@ -30,7 +28,6 @@ public class ButtonsHelper : MonoBehaviour
 		JoyHold();
 	}
 
-	Vector3 mousePos;
 	public void JoyHold()
 	{
 		if (isHold)
@@ -39,7 +36,7 @@ public class ButtonsHelper : MonoBehaviour
 			if (Mathf.Abs(joy.anchoredPosition.x) > 100 || Mathf.Abs(joy.anchoredPosition.y) > 100)
 				joy.anchoredPosition = joy.anchoredPosition.normalized * 100;
 
-			if (Mathf.Abs(joy.anchoredPosition.x) > 50)
+			if (Mathf.Abs(joy.anchoredPosition.x) > 50 && !player.IsDown)
 			{
 				Move((int)Mathf.Sign(joy.anchoredPosition.x));
 			}
@@ -63,6 +60,7 @@ public class ButtonsHelper : MonoBehaviour
 
 	public void JoyUp()
 	{
+		SitUp();
 		isHold = false;
 		player.Stop();
 		joy.anchoredPosition = Vector2.zero;

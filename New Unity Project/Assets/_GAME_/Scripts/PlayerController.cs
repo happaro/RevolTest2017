@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
 	private float offsetYup = -0.7f, offsetYdown = 0.1f, sizeYup = 7.9f, sizeYdown = 6.5f;
 	private bool isRightPunch, isRightPunchLeg, died;
 
+	public bool IsDown { get { return legController.GetBool("isDown"); } }
 	private void Start()
 	{
 		body = GetComponent<Rigidbody2D>();
@@ -110,7 +111,9 @@ public class PlayerController : MonoBehaviour
 		if (!died)
 		{
 			died = true;
-			this.transform.Rotate(0, 0, -90);
+			body.bodyType = RigidbodyType2D.Kinematic;
+			Destroy(this);
+			//this.transform.Rotate(0, 0, -90);
 			//if (deadClip != null)
 			//SoundManager.Instance.PlayClip(deadClip);
 			capsule.size = new Vector2(2, 2);
