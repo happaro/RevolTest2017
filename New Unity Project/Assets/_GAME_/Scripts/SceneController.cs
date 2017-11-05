@@ -2,16 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneController : MonoBehaviour {
+public class SceneController : MonoBehaviour
+{
+	public enum GameMode { Offline, Online}
+	public GameMode gameMode;
 
-    public void RunBotFightScene()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("BotFight");
-        Debug.Log("RunBotFightScene");
-    }
-    public void RunNetworkFightScene()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Lobby");
-        Debug.Log("RunNetworkFightScene");
-    }
+	public static SceneController Instance;
+	private void Awake()
+	{
+		if (!Instance)
+		{
+			Instance = this;
+			DontDestroyOnLoad(gameObject);
+		}
+		else
+			Destroy(gameObject);
+	}
+
+	public void LoadScene(string sceneName)
+	{
+		UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+	}
 }
