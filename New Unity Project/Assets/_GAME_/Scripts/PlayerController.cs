@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
 
 	public PlayerStats playerStats;
 	private bool isMainPlayer;
-	public bool isEnemy = false;
+	public bool isBot = false;
 
 	public Animator armController, legController, spineController;
 	bool isRightPunch;
