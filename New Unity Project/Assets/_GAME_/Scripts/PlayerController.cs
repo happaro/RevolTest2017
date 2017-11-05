@@ -7,18 +7,10 @@ public class PlayerController : MonoBehaviour
 	public int speed;
 	public float jumpForce;
 	public float healthPoints = 100;
+	public bool isBot = false;
 
 	public PlayerController enemy;
 	public PlayerStats playerStats;
-<<<<<<< HEAD
-=======
-	private bool isMainPlayer;
-	public bool isBot = false;
-
-	public Animator armController, legController, spineController;
-	bool isRightPunch;
-	bool isRightPunchLeg;
->>>>>>> ab12e9d416e5a10e6ca1538c3c45ffb44d295dd2
 
 	private Rigidbody2D body;
 	private int currentDirection;
@@ -81,7 +73,7 @@ public class PlayerController : MonoBehaviour
 			died = true;
 			this.transform.Rotate(0, 0, -90);
 			//if (deadClip != null)
-				//SoundManager.Instance.PlayClip(deadClip);
+			//SoundManager.Instance.PlayClip(deadClip);
 			capsule.size = new Vector2(2, 2);
 		}
 
