@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
 
 	void Update()
 	{
+		if (died)
+			return;
 		if (enemy != null)
 		{
 			int side = transform.position.x - enemy.transform.position.x > 0 ? -1 : 1;
@@ -112,7 +114,7 @@ public class PlayerController : MonoBehaviour
 		{
 			died = true;
 			body.bodyType = RigidbodyType2D.Kinematic;
-			Destroy(this);
+			//Destroy(this);
 			//this.transform.Rotate(0, 0, -90);
 			//if (deadClip != null)
 			//SoundManager.Instance.PlayClip(deadClip);
