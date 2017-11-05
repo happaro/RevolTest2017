@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
 	public CapsuleCollider2D capsule;
 	public AudioClip deadClip;
 
-	[HideInInspector]
 	public PlayerController enemy;
 
 	public PlayerStats playerStats;

@@ -17,12 +17,18 @@ public class HitPoint : MonoBehaviour
 	{
 		if (other.tag == "Enemy")
 		{
-			father.CmdHit(this.transform.position, damage, father.netId.Value);
-			//GameObject prefab = Resources.Load<GameObject>("punchStar");
-			//GameObject newObj = Instantiate(prefab, this.transform.position, Quaternion.identity) as GameObject;
-			//newObj.transform.parent = other.transform;
+            if (father != null)
+            {
+                father.CmdHit(this.transform.position, damage, father.netId.Value);
+            }
+            else 
+            {
+                GameObject prefab = Resources.Load<GameObject>("punchStar");
+                GameObject newObj = Instantiate(prefab, this.transform.position, Quaternion.identity) as GameObject;
+                newObj.transform.parent = other.transform;
+                other.GetComponent<PlayerController>().GetDamage(damage);
+            }
 			SoundManager.Instance.PlayClip(punchClip, 1, Random.Range(800f, 1200f) / 1000f);
-			//other.GetComponent<PlayerController>().GetDamage(damage);
 			gameObject.SetActive(false);
 		}
 	}
