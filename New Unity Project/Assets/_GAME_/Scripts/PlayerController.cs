@@ -65,25 +65,40 @@ public class PlayerController : MonoBehaviour
     {
         float distance = transform.position.x - enemy.transform.position.x;
         Debug.Log("distance = " + distance);
-        if (Mathf.Abs(distance)>2)
+        var changeDirectionPosibility = currentDirection == 1 ? 300 : 20;
+        if (Random.Range(0, changeDirectionPosibility) == 0)
+        {
+            currentDirection = Random.Range(-1, 2);
+        }
+        if (Mathf.Abs(distance)>1.8)
         {
             int sidee = distance > 0 ? -1 : 1;
-            transform.position += Vector3.right * sidee * speed * Time.deltaTime;
+            transform.position += Vector3.right * sidee * speed * Time.deltaTime * currentDirection;
+        }
+        else 
+        {
+            currentDirection = 0;
+        }
+        if (currentDirection != 0)
+        {
             legController.SetBool("isWalking", true);
         }
-        switch (Random.Range(0, 500))
+        else
         {
-            case 0: Jump(); break;
+            legController.SetBool("isWalking", false);
         }
+
+        if (Random.Range(0, 500) == 0) Jump();
+
         if (Mathf.Abs(distance)<3) 
         {
-            switch (Random.Range(0, 50))                
+            switch (Random.Range(0, 30))                
             {
                 case 0: PunchHand(); break;
                 case 1: PunchLeg(); break;
             }
         }
-        legController.SetBool("isWalking", false);
+        
 
     }
 
