@@ -9,8 +9,9 @@ public class WindowDialog : MonoBehaviour
 	public void Open(string text, Action yes, Action no = null)
 	{
 		gameObject.SetActive(true);
-		this.yesAction = yes;
+		yesAction = yes;
 		txt.text = text;
+		noAction = yes;
 	}
 
 	public void YesAction()
