@@ -4,6 +4,8 @@ public class ButtonsHelper : MonoBehaviour
 {
 	public PlayerController player;
 	public HealthBar healthLinePlayer, healthLineEnemy;
+	public HealthBar energyLinePlayer, energyLineEnemy;
+
 	public RectTransform joy;
 	public float maxR;
 
@@ -57,6 +59,11 @@ public class ButtonsHelper : MonoBehaviour
 				SitUp();
 			}
 		}
+	}
+
+	public void SuperAttack()
+	{
+		player.SuperAttack();
 	}
 
 	public void JoyUp()

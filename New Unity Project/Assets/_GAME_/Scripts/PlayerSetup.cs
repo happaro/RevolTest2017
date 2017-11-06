@@ -61,13 +61,14 @@ public class PlayerSetup : NetworkBehaviour
         RpcHit(position, damage, id);
     }
 
+
     [ClientRpc]
     private void RpcHit(Vector3 position, float damage, uint id)
     {
         objs = FindObjectsOfType<PlayerSetup>();
         var enemy = objs[0].netId.Value != id ? objs[0] : objs[1];
         GameObject prefab = Resources.Load<GameObject>("punchStar");
-        GameObject newObj = Instantiate(prefab, position + Vector3.back, Quaternion.identity) as GameObject;
+        Instantiate(prefab, position + Vector3.back, Quaternion.identity);
         //newObj.transform.parent = enemy.transform;
         enemy.GetComponent<PlayerController>().GetDamage(damage);
         enemy.GetComponent<PlayerController>().body
@@ -75,6 +76,7 @@ public class PlayerSetup : NetworkBehaviour
                 ? Vector2.left
                 : Vector2.right) * damage * 25);
         if (SoundManager.Instance.buffer != null)
+
         {
             SoundManager.Instance.PlayClip(SoundManager.Instance.buffer, 1, Random.Range(800f, 1200f) / 1000f);
         }

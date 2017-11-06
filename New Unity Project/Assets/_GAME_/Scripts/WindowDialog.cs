@@ -11,12 +11,13 @@ public class WindowDialog : MonoBehaviour
 		gameObject.SetActive(true);
 		yesAction = yes;
 		txt.text = text;
-		noAction = yes;
+		noAction = no;
 	}
 
 	public void YesAction()
 	{
 		yesAction();
+		Ok();
 	}
 
 	public void NoAction()
