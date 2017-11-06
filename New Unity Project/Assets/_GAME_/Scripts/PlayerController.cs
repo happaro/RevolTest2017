@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
 	public PlayerController enemy;
 
 	private PlayerStats playerStats;
-	private Rigidbody2D body;
+	public Rigidbody2D body;
 	private int currentDirection;
 	private bool isRightPunch, isRightPunchLeg, died;
 
