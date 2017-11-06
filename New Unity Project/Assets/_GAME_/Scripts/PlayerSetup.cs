@@ -51,7 +51,12 @@ public class PlayerSetup : NetworkBehaviour
             myPlayer.enemy = enemyPlayer;
             enemyPlayer.tag = "Enemy";
             enemyPlayer.enemy = myPlayer;
-            CmdLoadSkin(SaveManager.CurrentPlayerIndex, base.netId.Value);
+
+            if (SceneController.Instance.gameMode == SceneController.GameMode.Online)
+            {
+                CmdLoadSkin(SaveManager.CurrentPlayerIndex, base.netId.Value);
+            }
+                
         }       
     }
 
