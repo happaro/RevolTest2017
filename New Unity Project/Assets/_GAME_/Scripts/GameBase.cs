@@ -41,6 +41,8 @@ public class GameBaseEditor : Editor
 					gameBase.allPlayers[i].skills[j] = EditorGUILayout.IntField(gameBase.allPlayers[i].skills[j], GUILayout.Width(20));
 				}
 				//levelBase.allPlayers[i * cnt + j] = (PlayerProps)EditorGUILayout.ObjectField(levelBase.allPlayers[i * cnt + j], typeof(PlayerProps), true);
+
+				gameBase.allPlayers[i].texture = (Texture2D)EditorGUILayout.ObjectField(gameBase.allPlayers[i].texture, typeof(Texture2D), false, GUILayout.Width(80));
 				gameBase.allPlayers[i].avatar = (Sprite)EditorGUILayout.ObjectField(gameBase.allPlayers[i].avatar, typeof(Sprite), false, GUILayout.Width(80), GUILayout.Height(80));
 				gameBase.allPlayers[i].state = (Sprite)EditorGUILayout.ObjectField(gameBase.allPlayers[i].state, typeof(Sprite), false, GUILayout.Width(80), GUILayout.Height(80));
 
@@ -98,6 +100,7 @@ public class PlayerProps
 	public int price;
 	public Sprite avatar;
 	public Sprite state;
+	public Texture2D texture;
 	public Sprite[] parts;
 	public string playerInfo;
 	public GameObject prefab;

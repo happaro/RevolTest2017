@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 
 	private float offsetYup = 0.1f, sizeYup = 5.7f;
 	private float offsetYdown = 1.3f, sizeYdown = 3.7f;
+	public SpriteRenderer[] parts;
 
 	public PlayerController enemy;
 
@@ -22,19 +23,22 @@ public class PlayerController : MonoBehaviour
 	private bool isRightPunch, isRightPunchLeg, died;
 
 	public bool IsDown { get { return legController.GetBool("Down"); } }
+	public GameObject ananas;
 
-	private void Awake()
-	{
-		//if (isTest)
-			//UpdateSettings(false);
-	}
-
+	
 	private void Start()
 	{
+		Time.timeScale = 1;
 		body = GetComponent<Rigidbody2D>();
 		capsule = GetComponent<CapsuleCollider2D>();
 		if (isTest && !isBot)
 			ButtonsHelper.Instance.player = this;
+	}
+
+	void FuckPineapple()
+	{
+		ananas.SetActive(!ananas.activeSelf);
+		armController.SetBool("FuckPineapple", ananas.activeSelf);
 	}
 
 	public void UpdateSettings(bool mainPlayer = false)
@@ -44,7 +48,10 @@ public class PlayerController : MonoBehaviour
 
 	public void PushPlayerResources(PlayerProps props)
 	{
-		//SET TEXTURES, PROPS
+		Sprite[] sprites = Resources.LoadAll<Sprite>(props.texture.name);
+		int[] magicNumbers = { 3, 8, 0, 0, 1, 2, 7, 7, 5, 6 };
+		for (int i = 0; i < parts.Length; i++)
+			parts[i].sprite = sprites[magicNumbers[i]];
 	}
 
 	void Update()
@@ -56,18 +63,14 @@ public class PlayerController : MonoBehaviour
 			int side = transform.position.x - enemy.transform.position.x > 0 ? -1 : 1;
 			transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * side, transform.localScale.y, transform.localScale.z);
 		}
-
         if(isBot)
         {
             MakeAction();
             return;
         }
-
 		if (tag == "Enemy")
 			return;
-
         KeyboardCheck();
-
 		transform.position += Vector3.right * currentDirection * speed * Time.deltaTime;
 	}
 
@@ -83,6 +86,8 @@ public class PlayerController : MonoBehaviour
 			Sit();
 		if (Input.GetKeyUp(KeyCode.DownArrow))
 			SitUp();
+		if (Input.GetKeyUp(KeyCode.LeftShift))
+			FuckPineapple();
 		var inputX = Input.GetAxis("Horizontal");
 		transform.position += Vector3.right * inputX * speed * Time.deltaTime;
 		legController.SetBool("Walking", inputX != 0 || currentDirection != 0);
@@ -136,15 +141,16 @@ public class PlayerController : MonoBehaviour
 	{
 		if (!died)
 		{
+			FindObjectOfType<FightManager>().dialog.Open("Вы проебали. Играть еще раз?", () => 
+			{
+				SceneController.Instance.gameMode = SceneController.GameMode.Offline;
+				SceneController.Instance.LoadScene("FightScene");
+			}, () => { SceneController.Instance.LoadScene("Menu"); });
 			died = true;
+			Time.timeScale = 0;
 			body.bodyType = RigidbodyType2D.Kinematic;
-			//Destroy(this);
-			//this.transform.Rotate(0, 0, -90);
-			//if (deadClip != null)
-			//SoundManager.Instance.PlayClip(deadClip);
 			capsule.size = new Vector2(2, 2);
 		}
-
 	}
 
 	void SetCapsuleSize(bool big)

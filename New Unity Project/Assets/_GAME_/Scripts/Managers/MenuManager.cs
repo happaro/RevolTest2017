@@ -29,6 +29,8 @@ public class MenuManager : MonoBehaviour
 
 	private void Start()
 	{
+		Application.targetFrameRate = 60;
+		Time.timeScale = 1;
 		currentPlayer = gameBase.allPlayers[currentPlayerIndex];
 		UpdateHeroInfo();
 		if (SaveManager.IsFirstTime)
@@ -37,6 +39,7 @@ public class MenuManager : MonoBehaviour
 
 	public void Play()
 	{
+		SaveManager.CurrentPlayerIndex = currentPlayerIndex;
 		windowMode.Open();
 	}
 

@@ -5,7 +5,8 @@ public class WindowDialog : MonoBehaviour
 {
 	public UnityEngine.UI.Text txt;
 	Action yesAction;
-	public void Open(string text, Action yes)
+	Action noAction;
+	public void Open(string text, Action yes, Action no = null)
 	{
 		gameObject.SetActive(true);
 		this.yesAction = yes;
@@ -15,6 +16,11 @@ public class WindowDialog : MonoBehaviour
 	public void YesAction()
 	{
 		yesAction();
+	}
+
+	public void NoAction()
+	{
+		noAction();
 	}
 
 	public void Ok()

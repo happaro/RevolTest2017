@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 927a91ababd6c6947bf4173c3caccbdb
-timeCreated: 1509971630
+guid: 2f42b0450646f1d49a2e141a6e6b37cf
+timeCreated: 1509992925
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
-    21300000: testParts_0
-    21300002: testParts_2
-    21300004: testParts_3
+    21300000: Spine
+    21300002: Head
+    21300004: Head_pain
     21300006: testParts_5
-    21300008: testParts_6
-    21300010: testParts_7
-    21300012: testParts_9
-    21300014: testParts_11
-    21300016: testParts_12
-    21300018: testParts_14
+    21300008: legUp
+    21300010: arm
+    21300012: legRight
+    21300014: legLeft
+    21300016: armRight
+    21300018: armLeft
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -104,12 +104,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: testParts_0
+      name: Spine
       rect:
         serializedVersion: 2
-        x: 40
+        x: 28
         y: 522
-        width: 189
+        width: 201
         height: 455
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -117,33 +117,33 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: testParts_2
+      name: Head
       rect:
         serializedVersion: 2
         x: 607
-        y: 752
-        width: 193
-        height: 232
+        y: 736
+        width: 194
+        height: 277
       alignment: 9
-      pivot: {x: 0.30883664, y: 0.14603476}
+      pivot: {x: 0.296567, y: 0.12323513}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: testParts_3
+      name: Head_pain
       rect:
         serializedVersion: 2
-        x: 824
-        y: 751
-        width: 178
-        height: 226
+        x: 808
+        y: 733
+        width: 203
+        height: 271
       alignment: 9
-      pivot: {x: 0.37964827, y: 0.08924231}
+      pivot: {x: 0.42068797, y: 0.14633438}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: testParts_6
+      name: legUp
       rect:
         serializedVersion: 2
         x: 615
@@ -156,7 +156,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: testParts_7
+      name: arm
       rect:
         serializedVersion: 2
         x: 852
@@ -169,7 +169,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: testParts_9
+      name: legRight
       rect:
         serializedVersion: 2
         x: 24
@@ -182,7 +182,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: testParts_11
+      name: legLeft
       rect:
         serializedVersion: 2
         x: 291
@@ -190,12 +190,12 @@ TextureImporter:
         width: 213
         height: 369
       alignment: 9
-      pivot: {x: 0.25973597, y: 0.8709125}
+      pivot: {x: 0.29326117, y: 0.89994055}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: testParts_12
+      name: armRight
       rect:
         serializedVersion: 2
         x: 674
@@ -208,7 +208,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: testParts_14
+      name: armLeft
       rect:
         serializedVersion: 2
         x: 685

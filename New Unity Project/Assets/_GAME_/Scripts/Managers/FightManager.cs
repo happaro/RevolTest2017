@@ -5,6 +5,8 @@ public class FightManager : MonoBehaviour
 {
 	public GameObject playerPrefab;
 	public GameBase gameBase;
+	public WindowDialog dialog;
+	public WindowInfo info;
 
 	void Start()
 	{
