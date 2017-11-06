@@ -5,3 +5,5 @@ New Unity Project/ProjectSettings/ProjectSettings.asset
 New Unity Project/Assembly-CSharp.csproj
 New Unity Project/Assembly-CSharp.csproj
 *.csproj
+New Unity Project/New Unity Project.sln
+*.suo
