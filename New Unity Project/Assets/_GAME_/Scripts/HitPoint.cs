@@ -23,14 +23,15 @@ public class HitPoint : MonoBehaviour
             {
                 SoundManager.Instance.buffer = punchClip;
                 father.CmdHit(this.transform.position, damage, father.netId.Value);
-            }
-        }
+				gameObject.SetActive(false);
+			}
+		}
         else
         {
             var otherPlayerController = other.GetComponent<PlayerController>();
             if (otherPlayerController == null || playerController == otherPlayerController)
             {
-                gameObject.SetActive(false);
+                //gameObject.SetActive(false);
                 return;
             }
             GameObject prefab = Resources.Load<GameObject>("punchStar");
@@ -38,10 +39,6 @@ public class HitPoint : MonoBehaviour
             newObj.transform.parent = other.transform;
             otherPlayerController.GetDamage(damage);
             SoundManager.Instance.PlayClip(punchClip, 1, Random.Range(800f, 1200f) / 1000f);
-        }
-        
-        gameObject.SetActive(false);
+        }   
     }
-
-    
 }
