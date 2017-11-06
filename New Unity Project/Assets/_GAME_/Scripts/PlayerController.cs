@@ -5,7 +5,11 @@ public class PlayerController : MonoBehaviour
 {
 	public Animator armController, legController;
 	private CapsuleCollider2D capsule;
+	public int damage;
 	public int speed;
+	public int energySpeed;
+
+	public float energy = 0;
 	public float jumpForce;
 	private float healthPoints = 100;
 	public bool isBot = false;
@@ -41,21 +45,34 @@ public class PlayerController : MonoBehaviour
 		armController.SetBool("FuckPineapple", ananas.activeSelf);
 	}
 
-	public void UpdateSettings(bool mainPlayer = false)
-	{
-		transform.tag = mainPlayer ? "Player" : "Enemy";
-	}
-
 	public void PushPlayerResources(PlayerProps props)
 	{
 		Sprite[] sprites = Resources.LoadAll<Sprite>(props.texture.name);
 		int[] magicNumbers = { 3, 8, 0, 0, 1, 2, 7, 7, 5, 6 };
 		for (int i = 0; i < parts.Length; i++)
 			parts[i].sprite = sprites[magicNumbers[i]];
+		damage += props.skills[0] + SaveManager.GetExtraSkillLevel(SaveManager.CurrentPlayerIndex, 0);
+		speed += props.skills[1] + SaveManager.GetExtraSkillLevel(SaveManager.CurrentPlayerIndex, 1);
+		energySpeed += props.skills[2] + SaveManager.GetExtraSkillLevel(SaveManager.CurrentPlayerIndex, 2);
+	}
+
+	public void SuperAttack()
+	{
+		if (energy > 30)
+		{
+			if (SaveManager.CurrentPlayerIndex == 3)
+			{
+				ananas.SetActive(!ananas.activeSelf);
+				armController.SetBool("FuckPineapple", ananas.activeSelf);
+				energy -= 30;
+			}
+		}
 	}
 
 	void Update()
 	{
+		energy += Time.deltaTime * (energySpeed) / 3f;
+		UpdateEP();
 		if (died)
 			return;
 		if (enemy != null)
@@ -137,19 +154,43 @@ public class PlayerController : MonoBehaviour
 		else ButtonsHelper.Instance.healthLineEnemy.UpdateHP(healthPoints);
 	}
 
+	void UpdateEP()
+	{
+		if (tag == "Player")
+			ButtonsHelper.Instance.energyLinePlayer.UpdateHP(energy);
+		else ButtonsHelper.Instance.energyLineEnemy.UpdateHP(energy);
+	}
+
 	public void Die()
 	{
 		if (!died)
 		{
-			FindObjectOfType<FightManager>().dialog.Open("Вы проебали. Играть еще раз?", () => 
+			if (SceneController.Instance.gameMode == SceneController.GameMode.Offline)
 			{
-				SceneController.Instance.gameMode = SceneController.GameMode.Offline;
-				SceneController.Instance.LoadScene("FightScene");
-			}, () => { SceneController.Instance.LoadScene("Menu"); });
+				if (tag == "Enemy")
+				{
+					SaveManager.CoinsCount += 200;
+					FindObjectOfType<FightManager>().dialog.Open("Вы выиграл. Вам начислено 200 монет. Играть еще раз?", () =>
+					{
+						SceneController.Instance.gameMode = SceneController.GameMode.Offline;
+						SceneController.Instance.LoadScene("FightScene");
+					}, () => { SceneController.Instance.LoadScene("Menu"); });
+				}
+				else
+				{
+					FindObjectOfType<FightManager>().dialog.Open("Вы проебали. Играть еще раз?", () =>
+					{
+						SceneController.Instance.gameMode = SceneController.GameMode.Offline;
+						SceneController.Instance.LoadScene("FightScene");
+					}, () => { SceneController.Instance.LoadScene("Menu"); });
+				}
+			}
+			else
+			{
+				//NET
+			}
 			died = true;
 			Time.timeScale = 0;
-			body.bodyType = RigidbodyType2D.Kinematic;
-			capsule.size = new Vector2(2, 2);
 		}
 	}
 

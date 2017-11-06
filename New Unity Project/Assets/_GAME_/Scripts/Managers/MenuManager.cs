@@ -29,6 +29,7 @@ public class MenuManager : MonoBehaviour
 
 	private void Start()
 	{
+		SaveManager.CoinsCount += 10000;
 		Application.targetFrameRate = 60;
 		Time.timeScale = 1;
 		currentPlayer = gameBase.allPlayers[currentPlayerIndex];
@@ -66,13 +67,16 @@ public class MenuManager : MonoBehaviour
 	{
 		if (SaveManager.CoinsCount >= 300)
 		{
-			if (currentPlayer.skills[skillNum] + SaveManager.GetExtraSkillLevel(currentPlayerIndex, skillNum) < 5)
+			windowDialog.Open("Сделать апгрейд за 300 монет?", () => 
 			{
-				SaveManager.BuyExtraSkillLevel(currentPlayerIndex, skillNum);
-				SaveManager.CoinsCount -= 300;
-				UpdateHeroInfo();
-				UpdateCoinsCount();
-			}
+				if (currentPlayer.skills[skillNum] + SaveManager.GetExtraSkillLevel(currentPlayerIndex, skillNum) < 5)
+				{
+					SaveManager.BuyExtraSkillLevel(currentPlayerIndex, skillNum);
+					SaveManager.CoinsCount -= 300;
+					UpdateHeroInfo();
+					UpdateCoinsCount();
+				}
+			});
 		}
 		else
 		{

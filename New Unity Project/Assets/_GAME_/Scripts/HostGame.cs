@@ -15,15 +15,10 @@ public class HostGame : MonoBehaviour {
 	void Start ()
 	{
 		string str = randomWords[Random.Range(0, randomWords.Length)] + randomWords1[Random.Range(0, randomWords1.Length)];
-
-		Debug.Log(str);
-
 		roomNameText.text = str;
 		networkManager = NetworkManager.singleton;
 		if (networkManager.matchMaker == null)
-		{
 			networkManager.StartMatchMaker();
-		}
 	}
 
 	public void SetRoomName (string _name)

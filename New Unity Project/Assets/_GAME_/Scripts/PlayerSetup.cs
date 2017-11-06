@@ -62,7 +62,7 @@ public class PlayerSetup : NetworkBehaviour
 		objs = FindObjectsOfType<PlayerSetup>();
 		var enemy = objs[0].netId.Value != id ? objs[0] : objs[1];
 		GameObject prefab = Resources.Load<GameObject>("punchStar");
-		GameObject newObj = Instantiate(prefab, position + Vector3.back, Quaternion.identity) as GameObject;
+		Instantiate(prefab, position + Vector3.back, Quaternion.identity);
 		//newObj.transform.parent = enemy.transform;
 		enemy.GetComponent<PlayerController>().GetDamage(damage);
         if(SoundManager.Instance.buffer!= null)
