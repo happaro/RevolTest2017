@@ -29,7 +29,21 @@ public class PlayerController : MonoBehaviour
 	public bool IsDown { get { return legController.GetBool("Down"); } }
 	public GameObject ananas;
 
-	
+	//SPECIAL
+	public GameObject pineApplePrafab;
+
+	void FuckPineapple()
+	{
+		if (armController.GetBool("FuckPineapple"))
+		{
+			var ananas = (Instantiate(pineApplePrafab, new Vector3(transform.position.x + currentDirection, pineApplePrafab.transform.position.y, pineApplePrafab.transform.position.z), Quaternion.identity) as GameObject).GetComponent<Pineapple>() ;
+			ananas.direction = currentDirection;
+			energy -= 30;
+		}
+		ananas.SetActive(!ananas.activeSelf);
+		armController.SetBool("FuckPineapple", ananas.activeSelf);
+	}
+
 	private void Start()
 	{
 		Time.timeScale = 1;
@@ -39,11 +53,7 @@ public class PlayerController : MonoBehaviour
 			ButtonsHelper.Instance.player = this;
 	}
 
-	void FuckPineapple()
-	{
-		ananas.SetActive(!ananas.activeSelf);
-		armController.SetBool("FuckPineapple", ananas.activeSelf);
-	}
+
 
 	public void PushPlayerResources(PlayerProps props)
 	{
@@ -53,7 +63,7 @@ public class PlayerController : MonoBehaviour
 			parts[i].sprite = sprites[magicNumbers[i]];
 		damage += props.skills[0] + SaveManager.GetExtraSkillLevel(SaveManager.CurrentPlayerIndex, 0);
 		speed += props.skills[1] + SaveManager.GetExtraSkillLevel(SaveManager.CurrentPlayerIndex, 1);
-		energySpeed += props.skills[2] + SaveManager.GetExtraSkillLevel(SaveManager.CurrentPlayerIndex, 2);
+		energySpeed += (props.skills[2] + SaveManager.GetExtraSkillLevel(SaveManager.CurrentPlayerIndex, 2)) / 2;
 	}
 
 	public void SuperAttack()
@@ -62,16 +72,14 @@ public class PlayerController : MonoBehaviour
 		{
 			if (SaveManager.CurrentPlayerIndex == 3)
 			{
-				ananas.SetActive(!ananas.activeSelf);
-				armController.SetBool("FuckPineapple", ananas.activeSelf);
-				energy -= 30;
+				FuckPineapple();
 			}
 		}
 	}
 
 	void Update()
 	{
-		energy += Time.deltaTime * (energySpeed) / 3f;
+		energy += Time.deltaTime * (energySpeed);
 		UpdateEP();
 		if (died)
 			return;
