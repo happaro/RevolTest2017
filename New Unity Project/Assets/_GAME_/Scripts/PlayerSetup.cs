@@ -11,6 +11,15 @@ public class PlayerSetup : NetworkBehaviour
 
 	void Start()
     {
+        if (SceneController.Instance.gameMode == SceneController.GameMode.Online)
+        {
+            if (!isLocalPlayer)
+            {
+                for (int i = 0; i < componentsToDisable.Length; i++)
+                    componentsToDisable[i].enabled = false;
+                DisableAllAnimators(transform);
+            }
+        }
 		objs = FindObjectsOfType<PlayerSetup>();
         if (objs.Length == 1)
         {
@@ -38,13 +47,7 @@ public class PlayerSetup : NetworkBehaviour
 				objs[0].GetComponent<PlayerController>().enemy = objs[1].GetComponent<PlayerController>();
 				ButtonsHelper.Instance.player = objs[1].GetComponent<PlayerController>();
 			}
-		}
-        if (!isLocalPlayer)
-        {
-			for (int i = 0; i < componentsToDisable.Length; i++)
-                componentsToDisable[i].enabled = false;
-            DisableAllAnimators(transform);
-        }
+		}        
     }
 
 	[Command]

@@ -3,7 +3,7 @@ using UnityEngine.Networking;
 
 public class FightManager : MonoBehaviour
 {
-	public GameObject offlinePrefab;
+	public GameObject playerPrefab;
 	public GameBase gameBase;
 
 	void Start()
@@ -12,8 +12,8 @@ public class FightManager : MonoBehaviour
 		{
 			if (SceneController.Instance.gameMode == SceneController.GameMode.Offline)
 			{
-				var player = (Instantiate(offlinePrefab) as GameObject).GetComponent<PlayerController>();
-				var bot = (Instantiate(offlinePrefab) as GameObject).GetComponent<PlayerController>();
+				var player = (Instantiate(playerPrefab) as GameObject).GetComponent<PlayerController>();
+				var bot = (Instantiate(playerPrefab) as GameObject).GetComponent<PlayerController>();
 
 				player.enemy = bot;
 				player.transform.position = new Vector3(-6, -2, 0);
