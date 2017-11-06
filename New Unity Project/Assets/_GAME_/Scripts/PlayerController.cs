@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
 		body = GetComponent<Rigidbody2D>();
 		capsule = GetComponent<CapsuleCollider2D>();
 		if (isTest && !isBot)
-			ButtonsHelper.Instance.player = this;
+			ButtonsHelper.Instance.player = this;           
 	}
 
 
