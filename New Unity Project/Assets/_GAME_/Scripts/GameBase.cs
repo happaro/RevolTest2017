@@ -42,8 +42,8 @@ public class GameBaseEditor : Editor
 				}
 				//levelBase.allPlayers[i * cnt + j] = (PlayerProps)EditorGUILayout.ObjectField(levelBase.allPlayers[i * cnt + j], typeof(PlayerProps), true);
 				gameBase.allPlayers[i].avatar = (Sprite)EditorGUILayout.ObjectField(gameBase.allPlayers[i].avatar, typeof(Sprite), false, GUILayout.Width(80), GUILayout.Height(80));
-				//gameBase.allPlayers[i].obj = (GameObject)EditorGUILayout.ObjectField(gameBase.allPlayers[i].obj, typeof(GameObject), true, GUILayout.Width(100));
-				
+				gameBase.allPlayers[i].state = (Sprite)EditorGUILayout.ObjectField(gameBase.allPlayers[i].state, typeof(Sprite), false, GUILayout.Width(80), GUILayout.Height(80));
+
 				GUI.backgroundColor = Color.red;
 				if (GUILayout.Button("x", GUILayout.Width(30)))
 					gameBase.allPlayers = gameBase.allPlayers.Where(prod => prod.playerName != gameBase.allPlayers[i].playerName).ToArray();
@@ -97,6 +97,7 @@ public class PlayerProps
 	public int[] skills;
 	public int price;
 	public Sprite avatar;
+	public Sprite state;
 	public Sprite[] parts;
 	public string playerInfo;
 	public GameObject prefab;

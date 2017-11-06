@@ -1,28 +1,38 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 
 public class FightManager : MonoBehaviour
 {
-	public GameObject offlinePrefab, botPrefab;
+	public GameObject offlinePrefab;
 	public GameBase gameBase;
 
 	void Start()
 	{
-		if (SceneController.Instance.gameMode == SceneController.GameMode.Offline)
+		if (SceneController.Instance != null)
 		{
-			var player = (Instantiate(offlinePrefab) as GameObject).GetComponent<PlayerController>();
-			var bot = (Instantiate(botPrefab) as GameObject).GetComponent<PlayerController>();
-			player.enemy = bot;
-			bot.enemy = player;
-			var playerProps = gameBase.allPlayers[SaveManager.CurrentPlayerIndex];
+			if (SceneController.Instance.gameMode == SceneController.GameMode.Offline)
+			{
+				var player = (Instantiate(offlinePrefab) as GameObject).GetComponent<PlayerController>();
+				var bot = (Instantiate(offlinePrefab) as GameObject).GetComponent<PlayerController>();
 
-			ButtonsHelper.Instance.player = player;
-			ButtonsHelper.Instance.healthLinePlayer.avatar.sprite = playerProps.avatar;
-			player.PushPlayerResources(playerProps);
-			//INIT BOT
-		}
-		else
-		{
-			//SET ANOTHER PLAYER
+				player.enemy = bot;
+				player.transform.position = new Vector3(-6, -2, 0);
+				bot.enemy = player;
+				bot.isBot = true;
+				bot.tag = "Enemy";
+				bot.transform.position = new Vector3(6, -2, 0);
+
+				var playerProps = gameBase.allPlayers[SaveManager.CurrentPlayerIndex];
+
+				ButtonsHelper.Instance.player = player;
+				ButtonsHelper.Instance.healthLinePlayer.avatar.sprite = playerProps.avatar;
+				player.PushPlayerResources(playerProps);
+				//INIT BOT
+			}
+			else
+			{
+				//SET ANOTHER PLAYER
+			}
 		}
 	}
 }

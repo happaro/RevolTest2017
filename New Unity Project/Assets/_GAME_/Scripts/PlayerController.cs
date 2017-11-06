@@ -1,28 +1,46 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 
 public class PlayerController : MonoBehaviour
 {
 	public Animator armController, legController;
-	public CapsuleCollider2D capsule;
+	private CapsuleCollider2D capsule;
 	public int speed;
 	public float jumpForce;
-	public float healthPoints = 100;
+	private float healthPoints = 100;
 	public bool isBot = false;
+	public bool isTest = false;
+
+	private float offsetYup = 0.1f, sizeYup = 5.7f;
+	private float offsetYdown = 1.3f, sizeYdown = 3.7f;
 
 	public PlayerController enemy;
-	public PlayerStats playerStats;
 
+	private PlayerStats playerStats;
 	private Rigidbody2D body;
 	private int currentDirection;
-	private float offsetYup = -0.7f, offsetYdown = 0.1f, sizeYup = 7.9f, sizeYdown = 6.5f;
 	private bool isRightPunch, isRightPunchLeg, died;
 
-	public bool IsDown { get { return legController.GetBool("isDown"); } }
+	public bool IsDown { get { return legController.GetBool("Down"); } }
+
+	private void Awake()
+	{
+		//if (isTest)
+			//UpdateSettings(false);
+	}
+
 	private void Start()
 	{
 		body = GetComponent<Rigidbody2D>();
+		capsule = GetComponent<CapsuleCollider2D>();
+		if (isTest && !isBot)
+			ButtonsHelper.Instance.player = this;
 	}
 
+	public void UpdateSettings(bool mainPlayer = false)
+	{
+		transform.tag = mainPlayer ? "Player" : "Enemy";
+	}
 
 	public void PushPlayerResources(PlayerProps props)
 	{
@@ -67,7 +85,7 @@ public class PlayerController : MonoBehaviour
 			SitUp();
 		var inputX = Input.GetAxis("Horizontal");
 		transform.position += Vector3.right * inputX * speed * Time.deltaTime;
-		legController.SetBool("isWalking", inputX != 0 || currentDirection != 0);
+		legController.SetBool("Walking", inputX != 0 || currentDirection != 0);
 	}
 
     private void MakeAction()
@@ -84,9 +102,9 @@ public class PlayerController : MonoBehaviour
         else 
             currentDirection = 0;
         if (currentDirection != 0)
-            legController.SetBool("isWalking", true);
+            legController.SetBool("Walking", true);
         else
-            legController.SetBool("isWalking", false);
+            legController.SetBool("Walking", false);
 
         if (Random.Range(0, 500) == 0) Jump();
         if (Mathf.Abs(distance)<3) 
@@ -143,14 +161,16 @@ public class PlayerController : MonoBehaviour
 	{
 		//SoundManager.Instance.PlayClip(handWhip);
 		isRightPunch = !isRightPunch;
-		armController.SetTrigger(isRightPunch ? "punchRight" : "punchLeft");
+		armController.SetTrigger(isRightPunch ? "PunchRight" : "PunchLeft");
 	}
 
 	public void PunchLeg()
 	{
 		//SoundManager.Instance.PlayClip(legWhip);
 		isRightPunchLeg = !isRightPunchLeg;
-		legController.SetTrigger(isRightPunchLeg ? "punchRight" : "punchLeft");
+		legController.SetTrigger(isRightPunchLeg ? "PunchRight" : "PunchLeft");
+		legController.SetBool("Jump", false);
+
 	}
 
 	private void OnCollisionEnter2D(Collision2D collision)
@@ -170,14 +190,14 @@ public class PlayerController : MonoBehaviour
 
 	public void Sit()
 	{
-		legController.SetBool("isDown", true);
+		legController.SetBool("Down", true);
 		capsule.size = new Vector2(capsule.size.x, sizeYdown);
 		capsule.offset = new Vector2(capsule.offset.x, offsetYdown);
 	}
 
 	public void SitUp()
 	{
-		legController.SetBool("isDown", false);
+		legController.SetBool("Down", false);
 		capsule.size = new Vector2(capsule.size.x, sizeYup);
 		capsule.offset = new Vector2(capsule.offset.x, offsetYup);
 	}

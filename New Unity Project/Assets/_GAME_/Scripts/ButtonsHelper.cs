@@ -48,6 +48,7 @@ public class ButtonsHelper : MonoBehaviour
 				}
 				else
 				{
+					player.Stop();
 					SitDown();
 				}
 			}

@@ -50,7 +50,7 @@ public class MenuManager : MonoBehaviour
 
 	public void UpdateHeroInfo()
 	{
-		playerIcon.sprite = currentPlayer.avatar;
+		playerIcon.sprite = currentPlayer.state;
 		playerName.text = currentPlayer.playerName;
 		playerInfo.text = currentPlayer.playerInfo;
 
