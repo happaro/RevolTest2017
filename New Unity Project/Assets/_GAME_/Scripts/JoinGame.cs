@@ -58,14 +58,14 @@ public class JoinGame : MonoBehaviour {
 		{
 			GameObject _roomListItemGO = Instantiate(roomListItemPrefab);
 			_roomListItemGO.transform.SetParent(roomListParent);
-
+			
 			RoomListItem _roomListItem = _roomListItemGO.GetComponent<RoomListItem>();
 			if (_roomListItem != null)
 			{
 				_roomListItem.Setup(match, JoinRoom);
 			}
 
-			
+			_roomListItemGO.transform.GetComponent<RectTransform>().localScale = Vector3.one;
 			// as well as setting up a callback function that will join the game.
 
 			roomList.Add(_roomListItemGO);
