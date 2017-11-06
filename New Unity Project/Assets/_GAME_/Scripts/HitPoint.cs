@@ -9,7 +9,6 @@ public class HitPoint : MonoBehaviour
     public PlayerController playerController;
 	public float damage;
 	public AudioClip punchClip;
-
 	private void Start()
 	{
 		father = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerSetup>();
@@ -37,6 +36,10 @@ public class HitPoint : MonoBehaviour
             GameObject newObj = Instantiate(prefab, this.transform.position, Quaternion.identity) as GameObject;
             newObj.transform.parent = other.transform;
             otherPlayerController.GetDamage(damage);
+            otherPlayerController.body
+                .AddForce((otherPlayerController.transform.position.x - playerController.transform.position.x < 0 
+                ? Vector2.left 
+                : Vector2.right) * damage*25);
             SoundManager.Instance.PlayClip(punchClip, 1, Random.Range(800f, 1200f) / 1000f);
             gameObject.SetActive(false);
         }   
