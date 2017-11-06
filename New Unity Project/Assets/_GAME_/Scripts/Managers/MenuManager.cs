@@ -29,7 +29,7 @@ public class MenuManager : MonoBehaviour
 
 	private void Start()
 	{
-		SaveManager.CoinsCount += 10000;
+		//SaveManager.CoinsCount += 10000;
 		Application.targetFrameRate = 60;
 		Time.timeScale = 1;
 		currentPlayer = gameBase.allPlayers[currentPlayerIndex];
