@@ -18,14 +18,3 @@ public class PlayerInfoPrefab : MonoBehaviour
 		bar3.Put(props.energy);
 	}
 }
-
-public class SkillBar : MonoBehaviour
-{
-	public void Put(int value)
-	{
-		for (int i = 1; i < transform.childCount; i++)
-		{
-			transform.GetChild(i).gameObject.SetActive(value >= i);
-		}
-	}
-}

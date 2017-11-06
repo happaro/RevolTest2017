@@ -32,26 +32,30 @@ public class GameBaseEditor : Editor
 			for (int i = 0; i < gameBase.allPlayers.Length; i++)
 			{
 				GUILayout.BeginHorizontal();
-				gameBase.allPlayers[i].playerName = EditorGUILayout.TextField(gameBase.allPlayers[i].playerName);
-				//EditorGUILayout
+				gameBase.allPlayers[i].playerName = EditorGUILayout.TextField(gameBase.allPlayers[i].playerName, GUILayout.MinWidth(100));
+				gameBase.allPlayers[i].playerInfo = EditorGUILayout.TextArea(gameBase.allPlayers[i].playerInfo, GUILayout.MinWidth(100));
 				//EditorGUILayout.LabelField(gameBase.allPlayers[i].playerName, "", GUILayout.Width(25));
 				//EditorGUILayout.IntField("Price", gameBase.allPlayers[i].price, GUILayout.Width(80));
 				GUILayout.Label("Price", GUILayout.Width(30));
 				gameBase.allPlayers[i].price = EditorGUILayout.IntField(gameBase.allPlayers[i].price, GUILayout.Width(40));
 
 				GUILayout.Label("At/Sp/En", GUILayout.Width(60));
-				gameBase.allPlayers[i].attack = EditorGUILayout.IntField(gameBase.allPlayers[i].attack, GUILayout.Width(30));
-				gameBase.allPlayers[i].speed = EditorGUILayout.IntField(gameBase.allPlayers[i].speed, GUILayout.Width(30));
-				gameBase.allPlayers[i].energy = EditorGUILayout.IntField(gameBase.allPlayers[i].energy, GUILayout.Width(30));
+				gameBase.allPlayers[i].attack = EditorGUILayout.IntField(gameBase.allPlayers[i].attack, GUILayout.Width(20));
+				gameBase.allPlayers[i].speed = EditorGUILayout.IntField(gameBase.allPlayers[i].speed, GUILayout.Width(20));
+				gameBase.allPlayers[i].energy = EditorGUILayout.IntField(gameBase.allPlayers[i].energy, GUILayout.Width(20));
 
 				//levelBase.allPlayers[i * cnt + j] = (PlayerProps)EditorGUILayout.ObjectField(levelBase.allPlayers[i * cnt + j], typeof(PlayerProps), true);
-				//gameBase.allPlayers[i].image = (Sprite)EditorGUILayout.ObjectField(gameBase.allPlayers[i].image, typeof(Sprite), false, GUILayout.Width(90));
+				gameBase.allPlayers[i].avatar = (Sprite)EditorGUILayout.ObjectField(gameBase.allPlayers[i].avatar, typeof(Sprite), false, GUILayout.Width(80), GUILayout.Height(80));
 				//gameBase.allPlayers[i].obj = (GameObject)EditorGUILayout.ObjectField(gameBase.allPlayers[i].obj, typeof(GameObject), true, GUILayout.Width(100));
+				
 				GUI.backgroundColor = Color.red;
 				if (GUILayout.Button("x", GUILayout.Width(30)))
 					gameBase.allPlayers = gameBase.allPlayers.Where(prod => prod.playerName != gameBase.allPlayers[i].playerName).ToArray();
-				GUILayout.EndHorizontal();
 				GUI.backgroundColor = Color.white;
+				GUILayout.EndHorizontal();
+
+				GUILayout.Space(20);
+
 			}
 		}
 

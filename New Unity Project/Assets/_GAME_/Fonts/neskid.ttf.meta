@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 0eab92c0dcf122f4296eccb022498f3d
+timeCreated: 1509922277
+licenseType: Pro
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: NeSkid (Comica BD) ID120055769
+  fontNames:
+  - NeSkid (Comica BD) ID120055769
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
