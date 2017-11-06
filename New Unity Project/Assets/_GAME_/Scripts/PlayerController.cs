@@ -23,6 +23,12 @@ public class PlayerController : MonoBehaviour
 		body = GetComponent<Rigidbody2D>();
 	}
 
+
+	public void PushPlayerResources(PlayerProps props)
+	{
+		//SET TEXTURES, PROPS
+	}
+
 	void Update()
 	{
 		if (died)

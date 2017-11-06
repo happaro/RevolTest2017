@@ -1,26 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-	public RectTransform bar;
-
+	public Image bar;
+	public Image avatar;
 	public float maxWidth;
-
-
-	void Start ()
-	{
-		
-	}
 
 	public void UpdateHP(float HP)
 	{
-		bar.sizeDelta = new Vector2((HP / 100f) * maxWidth, bar.sizeDelta.y);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+		bar.fillAmount = HP / 100f;
 	}
 }

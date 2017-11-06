@@ -6,7 +6,7 @@ public class SceneController : MonoBehaviour
 {
 	public enum GameMode { Offline, Online}
 	public GameMode gameMode;
-
+	
 	public static SceneController Instance;
 	private void Awake()
 	{

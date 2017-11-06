@@ -209,8 +209,11 @@
     <Compile Include="Assets\_GAME_\Scripts\HitPoint.cs" />
     <Compile Include="Assets\_GAME_\Scripts\HostGame.cs" />
     <Compile Include="Assets\_GAME_\Scripts\JoinGame.cs" />
-    <Compile Include="Assets\_GAME_\Scripts\MenuManager.cs" />
-    <Compile Include="Assets\_GAME_\Scripts\MyNetworkManager.cs" />
+    <Compile Include="Assets\_GAME_\Scripts\Managers\FightManager.cs" />
+    <Compile Include="Assets\_GAME_\Scripts\Managers\MenuManager.cs" />
+    <Compile Include="Assets\_GAME_\Scripts\Managers\MyNetworkManager.cs" />
+    <Compile Include="Assets\_GAME_\Scripts\Managers\SaveManager.cs" />
+    <Compile Include="Assets\_GAME_\Scripts\Managers\SoundManager.cs" />
     <Compile Include="Assets\_GAME_\Scripts\PlayerController.cs" />
     <Compile Include="Assets\_GAME_\Scripts\PlayerInfoPrefab.cs" />
     <Compile Include="Assets\_GAME_\Scripts\PlayerSetup.cs" />
@@ -218,11 +221,8 @@
     <Compile Include="Assets\_GAME_\Scripts\PointsHelper.cs" />
     <Compile Include="Assets\_GAME_\Scripts\PunchStar.cs" />
     <Compile Include="Assets\_GAME_\Scripts\RoomListItem.cs" />
-    <Compile Include="Assets\_GAME_\Scripts\SaveManager.cs" />
     <Compile Include="Assets\_GAME_\Scripts\SceneController.cs" />
     <Compile Include="Assets\_GAME_\Scripts\SkillBar.cs" />
-    <Compile Include="Assets\_GAME_\Scripts\SoundManager.cs" />
-    <Compile Include="Assets\_GAME_\Scripts\StartManager.cs" />
     <Compile Include="Assets\_GAME_\Scripts\WindowDialog.cs" />
     <Compile Include="Assets\_GAME_\Scripts\WindowInfo.cs" />
     <Compile Include="Assets\_GAME_\Scripts\WindowMode.cs" />
