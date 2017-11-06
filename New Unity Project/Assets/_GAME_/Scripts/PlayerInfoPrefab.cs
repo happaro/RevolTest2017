@@ -13,8 +13,8 @@ public class PlayerInfoPrefab : MonoBehaviour
 	{
 		playerName.text = props.playerName;
 		info.text = props.playerInfo;
-		bar1.Put(props.attack);
-		bar2.Put(props.speed);
-		bar3.Put(props.energy);
+		bar1.Put(props.skills[0]);
+		bar2.Put(props.skills[1]);
+		bar3.Put(props.skills[2]);
 	}
 }
