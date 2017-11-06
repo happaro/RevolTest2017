@@ -29,11 +29,13 @@ public class FightManager : MonoBehaviour
 				ButtonsHelper.Instance.player = player;
 				ButtonsHelper.Instance.healthLinePlayer.avatar.sprite = playerProps.avatar;
 				player.PushPlayerResources(playerProps);
+
 				//INIT BOT
+                bot.PushPlayerResources(gameBase.allPlayers[Random.Range(0, 4)]);
 			}
 			else
 			{
-				//SET ANOTHER PLAYER
+				
 			}
 		}
 	}
