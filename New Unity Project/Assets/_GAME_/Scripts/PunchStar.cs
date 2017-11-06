@@ -16,5 +16,7 @@ public class PunchStar : MonoBehaviour
 	{
 		myRend.color = new Color(1, 1, 1, a);
 		a -= Time.deltaTime * 2;
+		if (a < 0)
+			Destroy(gameObject);
 	}
 }

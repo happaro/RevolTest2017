@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HitPoint : MonoBehaviour
 {
+	[HideInInspector]
 	public PlayerSetup father;
     public PlayerController playerController;
 	public float damage;

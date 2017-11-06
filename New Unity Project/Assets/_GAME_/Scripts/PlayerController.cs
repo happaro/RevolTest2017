@@ -147,6 +147,20 @@ public class PlayerController : MonoBehaviour
 
 	}
 
+	void SetCapsuleSize(bool big)
+	{
+		if (big)
+		{
+			capsule.size = new Vector2(capsule.size.x, sizeYup);
+			capsule.offset = new Vector2(capsule.offset.x, offsetYup);
+		}
+		else
+		{
+			capsule.size = new Vector2(capsule.size.x, sizeYdown);
+			capsule.offset = new Vector2(capsule.offset.x, offsetYdown);
+		}
+	}
+
 	public void Move(int direction)
 	{
 		currentDirection = direction;
@@ -176,7 +190,10 @@ public class PlayerController : MonoBehaviour
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
 		if (collision.transform.tag == "Floor")
+		{
 			legController.SetBool("Jump", false);
+			//SetCapsuleSize(true);
+		}
 	}
 	public void Jump()
 	{
@@ -191,14 +208,12 @@ public class PlayerController : MonoBehaviour
 	public void Sit()
 	{
 		legController.SetBool("Down", true);
-		capsule.size = new Vector2(capsule.size.x, sizeYdown);
-		capsule.offset = new Vector2(capsule.offset.x, offsetYdown);
+		SetCapsuleSize(false);
 	}
 
 	public void SitUp()
 	{
 		legController.SetBool("Down", false);
-		capsule.size = new Vector2(capsule.size.x, sizeYup);
-		capsule.offset = new Vector2(capsule.offset.x, offsetYup);
+		SetCapsuleSize(true);
 	}
 }

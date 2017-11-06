@@ -231,6 +231,7 @@
     <None Include="Assets\SpritesAndBones\Shader\LinesColoredBlended.shader" />
     <None Include="Assets\SpritesAndBones\Shader\Sprites-Skeleton-Cutout.shader" />
     <None Include="Assets\SpritesAndBones\Shader\Sprites-Skeleton-Diffuse.shader" />
+    <None Include="Assets\SpritesAndBones\license-attributions.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
