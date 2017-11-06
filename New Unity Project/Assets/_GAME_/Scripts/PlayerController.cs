@@ -178,7 +178,7 @@ public class PlayerController : MonoBehaviour
 				if (tag == "Enemy")
 				{
 					SaveManager.CoinsCount += 200;
-					FindObjectOfType<FightManager>().dialog.Open("Вы выиграл. Вам начислено 200 монет. Играть еще раз?", () =>
+					FindObjectOfType<FightManager>().dialog.Open("Вы выиграле. Вам начислено 200 монет. Играть еще раз?", () =>
 					{
 						SceneController.Instance.gameMode = SceneController.GameMode.Offline;
 						SceneController.Instance.LoadScene("FightScene");
@@ -186,7 +186,7 @@ public class PlayerController : MonoBehaviour
 				}
 				else
 				{
-					FindObjectOfType<FightManager>().dialog.Open("Вы проебали. Играть еще раз?", () =>
+					FindObjectOfType<FightManager>().dialog.Open("Вы проевали. Играть еще раз?", () =>
 					{
 						SceneController.Instance.gameMode = SceneController.GameMode.Offline;
 						SceneController.Instance.LoadScene("FightScene");
@@ -195,7 +195,15 @@ public class PlayerController : MonoBehaviour
 			}
 			else
 			{
-				//NET
+				if (tag == "Enemy")
+				{
+					SaveManager.CoinsCount += 200;
+					FindObjectOfType<FightManager>().info.Open("Вы выиграле. Вам начислено 200 монет. ", () => { SceneController.Instance.LoadScene("Menu"); });
+				}
+				else
+				{
+					FindObjectOfType<FightManager>().info.Open("Вы про**али. Это фиаско, братан!", () => { SceneController.Instance.LoadScene("Menu"); });
+				}
 			}
 			died = true;
 			Time.timeScale = 0;

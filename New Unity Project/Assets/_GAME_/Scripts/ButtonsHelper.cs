@@ -17,6 +17,12 @@ public class ButtonsHelper : MonoBehaviour
 		Instance = this;
 	}
 
+
+	public void BackToMenu()
+	{
+		SceneController.Instance.LoadScene("Menu");
+	}
+
 	private Vector2 startPosition;
 
 	private bool isHold = false;
