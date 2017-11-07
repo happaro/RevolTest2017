@@ -28,6 +28,7 @@ public class ButtonsHelper : MonoBehaviour
 	private bool isHold = false;
 	public void JoyDown()
 	{
+		
 		isHold = true;
 	}
 
@@ -40,7 +41,7 @@ public class ButtonsHelper : MonoBehaviour
 	{
 		if (isHold)
 		{
-			joy.transform.position = Input.mousePosition;
+			joy.transform.position = Input.GetTouch(0).position;
 			if (Mathf.Abs(joy.anchoredPosition.x) > 100 || Mathf.Abs(joy.anchoredPosition.y) > 100)
 				joy.anchoredPosition = joy.anchoredPosition.normalized * 100;
 
