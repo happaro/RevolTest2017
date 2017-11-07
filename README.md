@@ -10,3 +10,17 @@
 Прокачавши свого гравця рушайте в бій на Онлайн арену: створюйте свою кімнату для бою, або забігайте в кімнату до свої друзів.
 
 Сподіваємось вам ця гра принесе так само фану як і нам при її розробці.
+
+Доречі, гра є кросплатформленою і можна грати телефон-> телефон, телефон-> комп, комп-> комп по інтернету.
+
+А стосовно дизайну, все на скріншотах видно:
+
+![alt tag](https://raw.githubusercontent.com/happaro/RevolTest2017/master/ScreenShots/1.PNG)
+
+![alt tag](https://raw.githubusercontent.com/happaro/RevolTest2017/master/ScreenShots/2.PNG)
+
+![alt tag](https://raw.githubusercontent.com/happaro/RevolTest2017/master/ScreenShots/3.PNG)
+
+![alt tag](https://raw.githubusercontent.com/happaro/RevolTest2017/master/ScreenShots/4.PNG)
+
+![alt tag](https://raw.githubusercontent.com/happaro/RevolTest2017/master/ScreenShots/5.PNG)
